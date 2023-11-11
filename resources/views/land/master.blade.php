@@ -111,14 +111,14 @@
 					<div class="header-bottom d-flex flex-wrap justify-content-between align-items-center">
 						<div class="brand-logo d-none d-lg-inline-block">
 							<div class="logo">
-								<a href="index.html">
-									<img src="/assets/images/logo/logo.png" alt="logo">
+								<a href="/">
+									<img src="{{$system->logo_primary}}" alt="logo">
 								</a>
 							</div>
 						</div>
 						<div class="header-wrapper justify-content-lg-end">
 							<div class="mobile-logo d-lg-none">
-								<a href="index.html"><img src="/assets/images/logo/logo.png" alt="logo"></a>
+								<a href="/"><img src="{{$system->logo_primary_alt}}" alt="logo"></a>
 							</div>
 							<div class="menu-area">
 								<ul class="menu">
