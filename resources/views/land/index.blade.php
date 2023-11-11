@@ -129,4 +129,34 @@
     
 @endif
 
+@if ($about = $sections->where('section','about')->first())
+    <!-- ===========About Section start Here========== -->
+	<section class="about-section">
+		<div class="container">
+			<div class="section-wrapper padding-top">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="about-image">
+							<img src="{{$about->cover}}" alt="about-image">
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-10">
+						<div class="about-wrapper">
+							<div class="section-header">
+								<p>{!!$about->sub_title!!}</p>
+								<h2>{!!$about->title!!}</h2>
+							</div>
+							<div class="about-content">
+								<p>{!!$about->detail!!}</p>
+								{!!$about->content!!}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ===========About Section Ends Here========== -->
+@endif
+
 @endsection
