@@ -17,7 +17,6 @@ class SystemFactory extends Factory
     public function definition(): array
     {
         return [
-        
             "site_name" => "DIVE E-Sport",
             "site_lang" => "en",
             "site_url" => "https://diveesport.com",
@@ -29,16 +28,16 @@ class SystemFactory extends Factory
             "logo_secondary" => "https://diveesport.com/images/logo.png",
             "logo_primary_alt" => "https://diveesport.com/images/logo.png",
             "logo_secondary_alt" => "https://diveesport.com/images/logo.png",
-            "favicon" => "https://diveesport.com/images/logo.png",
-            "phone" => "+90 555 555 55 55",
-            "email" => "kQdLs@example.com",
+            "favicon" => "/assets/images/favicon.png",
+            "phone" => "546 497 1229",
+            "email" => "info@metatige.com",
             "address" => "Lorem ipsum dolor sit ament.",
             "facebook" => "https://facebook.com",
             "twitter" => "https://twitter.com",
             "instagram" => "https://instagram.com",
             "linkedin" => "https://linkedin.com",
             "discord" => "https://discord.com",
-            "twicth" => "https://twicth.com",
+            "twitch" => "https://twitch.com",
             "youtube" => "https://youtube.com",
             "skype" => "https://skype.com",
             "site_status" => 1,

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\System;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,7 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        view()->share('system', \App\Models\System::first());
+        if (Schema::hasTable('system')) {
+            $system = System::first();
+            if ($system) {
+                view()->share('system', $system);
+            }
+        }
+    
+        
     }
 }

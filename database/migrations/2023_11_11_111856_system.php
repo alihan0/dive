@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string("instagram")->nullable();
             $table->string("linkedin")->nullable();
             $table->string("discord")->nullable();
-            $table->string("twicth")->nullable();
+            $table->string("twitch")->nullable();
             $table->string("youtube")->nullable();
             $table->string("skype")->nullable();
             $table->integer("site_status");
@@ -48,6 +48,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
     }
 };
