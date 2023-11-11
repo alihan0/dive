@@ -184,4 +184,94 @@
 	</section>
 	<!-- ===========CTA Section Ends Here========== -->
 @endif
+
+@if ($team = $sections->where('section','teams')->first())
+    <!-- ===========Sponsor Section Start Here========== -->
+	<div class="sponsor-section padding-top padding-bottom">
+		<div class="container">
+			<div class="section-header">
+				<p>{!!$team->sub_title!!}</p>
+				<h2>{!!$team->title!!}</h2>
+			</div>
+			<div class="section-wrapper">
+				<div class="row g-5 justify-content-center row-cols-md-5 row-cols-sm-3 row-cols-2">
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/01.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/02.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/03.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/04.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/05.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/06.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/07.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="sponsor-item">
+							<div class="sponsor-inner">
+								<div class="sponsor-thumb text-center">
+									<img src="assets/images/sponsor/home-2/08.png" alt="sponsor-thumb">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- ===========Sponsor Section Ends Here========== -->
+@endif
 @endsection

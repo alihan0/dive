@@ -110,6 +110,16 @@ class DatabaseSeeder extends Seeder
             ]);
 
             error_log('DCBANNER Section Installed.');
+
+            Sections::create([
+                "page" => "index",
+                "section" => "teams",
+                "title" => "See the showcase of all-star teams",
+                "sub_title" => "Showcase of Stars",
+                "status" => 1
+            ]);
+
+            error_log('Teams Section Installed.');
         
     }
 }
