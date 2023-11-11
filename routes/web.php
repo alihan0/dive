@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,8 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::get('/logout', 'logout');
     Route::get('/login/admin', 'admin_login');
     Route::post('/login/admin', 'admin_login_control');
+});
+
+Route::controller(AppController::class)->prefix('app')->middleware('auth')->group(function(){
+    Route::get('/', 'app');
 });
