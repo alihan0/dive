@@ -40,6 +40,7 @@ class SystemFactory extends Factory
             "twitch" => "https://twitch.com",
             "youtube" => "https://youtube.com",
             "skype" => "https://skype.com",
+            "footer_cover" => "/assets/images/footer/bg-2.jpg",
             "site_status" => 1,
             "userpanel_status" => 1,
             "adminpanel_status" => 1

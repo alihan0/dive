@@ -130,7 +130,7 @@
 										<a href="/teams">Teams</a>
 									</li>
 									<li><a href="/tournaments">Tournaments</a></li>
-									<li><a href="/fixture">Fixture</a></li>
+									<li><a href="/calendar">Calendar</a></li>
 									<li><a href="/support">Support</a></li>
 								</ul>
 								<a href="/app/" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
@@ -169,7 +169,7 @@
                                     <img src="/assets/images/footer/icons/01.png" alt="Phone-icon">
                                 </div>
                                 <div class="lab-content">
-                                    <span>Phone Number : +88012 345 678 912</span>
+                                    <span>Phone Number : {{$system->phone}}</span>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                                     <img src="/assets/images/footer/icons/02.png" alt="email-icon">
                                 </div>
                                 <div class="lab-content">
-                                    <span>Email : youremail@gmail.com</span>
+                                    <span>Email : {{$system->email}}</span>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                                     <img src="/assets/images/footer/icons/03.png" alt="location-icon">
                                 </div>
                                 <div class="lab-content">
-                                    <span>Address : 30 North West New York 240</span>
+                                    <span>Address : {{$system->address}}</span>
                                 </div>
                             </div>
                         </div>
@@ -201,21 +201,42 @@
                 </div>
             </div>
         </div>
-        <div class="footer-middle padding-top padding-bottom" style="background-image: url(/assets/images/footer/bg-2.jpg);">
+        <div class="footer-middle padding-top padding-bottom" style="background-image: url({{$system->footer_cover}});">
             <div class="container">
                 <div class="row padding-lg-top">
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="footer-middle-item-wrapper">
                             <div class="footer-middle-item mb-lg-0">
                                 <div class="fm-item-title mb-4">
-                                    <img src="/assets/images/logo/logo.png" alt="logo">
+                                    <img src="{{$system->logo_primary_alt}}" alt="logo">
                                 </div>
                                 <div class="fm-item-content">
-                                    <p class="mb-4">Upropriate brand economca sound technolog after covalent technology enable prospective wastng markets whereas propriate and brand economca sound technolog</p>
+                                    <p class="mb-4">{{$system->about}}</p>
 									<ul class="match-social-list d-flex flex-wrap align-items-center">
-										<li><a href="#"><img src="/assets/images/match/social-1.png" alt="vimeo"></a></li>
-										<li><a href="#"><img src="/assets/images/match/social-2.png" alt="youtube"></a></li>
-										<li><a href="#"><img src="/assets/images/match/social-3.png" alt="twitch"></a></li>
+										@if ($system->facebook)
+											<li><a href="{{$system->facebook}}"><i class="fab fa-facebook-f"></i></a></li>
+										@endif
+										@if ($system->twitter)
+											<li><a href="{{$system->twitter}}"><i class="fab fa-twitter"></i></a></li>
+										@endif
+										@if ($system->instagram)
+											<li><a href="{{$system->instagram}}"><i class="fab fa-instagram"></i></a></li>
+										@endif
+										@if ($system->linkedin)
+											<li><a href="{{$system->linkedin}}"><i class="fab fa-linkedin"></i></a></li>
+										@endif
+										@if ($system->discord)
+											<li><a href="{{$system->discord}}"><i class="fab fa-discord"></i></a></li>
+										@endif
+										@if ($system->youtube)
+											<li><a href="{{$system->youtube}}"><i class="fab fa-youtube"></i></a></li>
+										@endif
+										@if ($system->twitch)
+											<li><a href="{{$system->twitch}}"><i class="fab fa-twitch"></i></a></li>
+										@endif
+										@if ($system->skype)
+											<li><a href="{{$system->skype}}"><i class="fab fa-skype"></i></a></li>
+										@endif
 									</ul>
                                 </div>
                             </div>
@@ -225,64 +246,16 @@
                         <div class="footer-middle-item-wrapper">
                             <div class="footer-middle-item mb-lg-0">
                                 <div class="fm-item-title">
-                                    <h4>Top jackpot games</h4>
+                                    <h4>LINKS</h4>
                                 </div>
-                                <div class="fm-item-content">
-                                    <div class="fm-item-widget lab-item">
-                                        <div class="lab-inner">
-                                            <div class="lab-thumb">
-                                                <a href="#"> <img src="/assets/images/footer/01.jpg" alt="footer-widget-img"></a>
-                                            </div>
-                                            <div class="lab-content">
-                                                <h6><a href="blog-single.html">free Poker Game</a></h6>
-                                                <p>Poker: <b>$230</b></p>
-												<div class="rating">
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-												</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="fm-item-widget lab-item">
-                                        <div class="lab-inner">
-                                            <div class="lab-thumb">
-                                                <a href="#"><img src="/assets/images/footer/02.jpg" alt="footer-widget-img"></a>
-                                            </div>
-                                            <div class="lab-content">
-                                                <h6><a href="blog-single.html">CLUB Poker Game</a></h6>
-                                                <p>Poker: <b>$290</b></p>
-												<div class="rating">
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-												</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="fm-item-widget lab-item">
-                                        <div class="lab-inner">
-                                            <div class="lab-thumb">
-                                                <a href="#"><img src="/assets/images/footer/03.jpg" alt="footer-widget-img"></a>
-                                            </div>
-                                            <div class="lab-content">
-                                                <h6><a href="blog-single.html">ROYAL Poker Game</a></h6>
-                                                <p>Poker: <b>$330</b></p>
-												<div class="rating">
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-													<i class="icofont-ui-rating"></i>
-												</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+								<ul>
+									<li><a href="">About</a></li>
+									<li><a href="">Out Team</a></li>
+									<li><a href="">Support</a></li>
+									<li><a href="">Term of Use</a></li>
+									<li><a href="">Privacy Policy</a></li>
+								</ul>
                             </div>
                         </div>
                     </div>
@@ -290,19 +263,11 @@
                         <div class="footer-middle-item-wrapper">
                             <div class="footer-middle-item-3 mb-lg-0">
                                 <div class="fm-item-title">
-                                    <h4>Our Newsletter</h4>
+                                    <h4>Coming Tournaments</h4>
                                 </div>
                                 <div class="fm-item-content">
-                                    <p>Bi-Gamer esports organization supported by community leaders</p>
-                                    <form>
-                                        <div class="form-group mb-4">
-                                            <input type="text" class="form-control" placeholder="Your Name">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="email" class="form-control" placeholder="Your Email">
-                                        </div>
-										<button type="submit" class="default-button"><span>Send Massage <i class="icofont-circled-right"></i></span></button>
-                                    </form>
+                                    <p>No comint tournament.</p>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -315,7 +280,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="footer-bottom-content text-center">
-                            <p>&copy;2022 <a href="index.html">Bi-Gamer</a> - eSpost And Gameing HTML Template.</p>
+                            <p>Copyright &copy; 2024 - <a href="/">{{$system->site_name}}</a> | All rights reserved.</p>
                         </div>
                     </div>
                 </div>

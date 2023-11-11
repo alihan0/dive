@@ -34,12 +34,24 @@ class DatabaseSeeder extends Seeder
                     "cover" => "https://upload.wikimedia.org/wikipedia/commons/0/0a/The_International_2014.jpg",
                     "sub_title" => "GNUINE MONEY TRANSACTION",
                     "detail" => "Lorem ipsum dolor sit ament.",
-                    "button1_text" => "JOIN US TODAY",
+                    "button1_text" => '<span>join us today  <i class="icofont-play-alt-1"></i></span>',
                     "button1_src" => "#",
                     "status" => 1
             ]);
 
             error_log('Hero Section Installed.');
+
+            Sections::create([
+                "page" => "index",
+                "section" => "match",
+                "title" => "MATCHES",
+                "sub_title" => "COMING",
+                "button1_text" => '<span>Browse All Matches <i class="icofont-circled-right"></i></span> ',
+                "button1_src" => "/matches",
+                "status" => 1
+            ]);
+
+            error_log('Match Section Installed.');
 
         
         

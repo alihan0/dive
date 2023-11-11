@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string("twitch")->nullable();
             $table->string("youtube")->nullable();
             $table->string("skype")->nullable();
+            $table->string("footer_cover")->nullable();
             $table->integer("site_status");
             $table->integer("userpanel_status");
             $table->integer("adminpanel_status");
