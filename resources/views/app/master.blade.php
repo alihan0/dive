@@ -1,30 +1,30 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{$system->site_lang}}" class="dark-theme">
 
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<link rel="icon" href="{{$system->favicon}}" type="image/png" />
 	<!--plugins-->
-	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-	<link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+	<link href="/apps/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="/apps/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="/apps/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<link href="/apps/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 	<!-- loader-->
-	<link href="assets/css/pace.min.css" rel="stylesheet" />
-	<script src="assets/js/pace.min.js"></script>
+	<link href="/apps/css/pace.min.css" rel="stylesheet" />
+	<script src="/apps/js/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-extended.css" rel="stylesheet">
-	<link href="assets/css/app.css" rel="stylesheet">
-	<link href="assets/css/icons.css" rel="stylesheet">
+	<link href="/apps/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/apps/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="/apps/css/app.css" rel="stylesheet">
+	<link href="/apps/css/icons.css" rel="stylesheet">
 	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="assets/css/dark-theme.css" />
-	<link rel="stylesheet" href="assets/css/semi-dark.css" />
-	<link rel="stylesheet" href="assets/css/header-colors.css" />
-	<title>Syndron - Bootstrap5 Admin Template</title>
+	<link rel="stylesheet" href="/apps/css/dark-theme.css" />
+	<link rel="stylesheet" href="/apps/css/semi-dark.css" />
+	<link rel="stylesheet" href="/apps/css/header-colors.css" />
+	<title>@yield('title')</title>
 </head>
 
 <body>
@@ -36,355 +36,29 @@
 				<nav class="navbar navbar-expand">
 					<div class="topbar-logo-header">
 						<div class="">
-							<img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+							<img src="{{$system->logo_primary}}" class="" width="50" alt="logo icon">
 						</div>
-						<div class="">
-							<h4 class="logo-text">Syndron</h4>
-						</div>
+						
 					</div>
 					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
-					<div class="search-bar flex-grow-1">
-						<div class="position-relative search-bar-box">
-							<input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
-							<span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
-						</div>
-					</div>
+					
 					<div class="top-menu ms-auto">
-						<ul class="navbar-nav align-items-center">
-							<li class="nav-item mobile-search-icon">
-								<a class="nav-link" href="#">	<i class='bx bx-search'></i>
-								</a>
-							</li>
-							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">	<i class='bx bx-category'></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<div class="row row-cols-3 g-3 p-3">
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-group'></i>
-											</div>
-											<div class="app-title">Teams</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bx-atom'></i>
-											</div>
-											<div class="app-title">Projects</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-lush text-white"><i class='bx bx-shield'></i>
-											</div>
-											<div class="app-title">Tasks</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-kyoto text-dark"><i class='bx bx-notification'></i>
-											</div>
-											<div class="app-title">Feeds</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-blues text-dark"><i class='bx bx-file'></i>
-											</div>
-											<div class="app-title">Files</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-moonlit text-white"><i class='bx bx-filter-alt'></i>
-											</div>
-											<div class="app-title">Alerts</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
-									<i class='bx bx-bell'></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:;">
-										<div class="msg-header">
-											<p class="msg-header-title">Notifications</p>
-											<p class="msg-header-clear ms-auto">Marks all as read</p>
-										</div>
-									</a>
-									<div class="header-notifications-list">
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Customers<span class="msg-time float-end">14 Sec
-												ago</span></h6>
-													<p class="msg-info">5 new user registered</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-danger text-danger"><i class="bx bx-cart-alt"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
-												ago</span></h6>
-													<p class="msg-info">You have recived new orders</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-success text-success"><i class="bx bx-file"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">24 PDF File<span class="msg-time float-end">19 min
-												ago</span></h6>
-													<p class="msg-info">The pdf files generated</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-warning text-warning"><i class="bx bx-send"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Time Response <span class="msg-time float-end">28 min
-												ago</span></h6>
-													<p class="msg-info">5.1 min avarage time response</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-info text-info"><i class="bx bx-home-circle"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Product Approved <span
-												class="msg-time float-end">2 hrs ago</span></h6>
-													<p class="msg-info">Your new product has approved</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-danger text-danger"><i class="bx bx-message-detail"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Comments <span class="msg-time float-end">4 hrs
-												ago</span></h6>
-													<p class="msg-info">New customer comments recived</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-success text-success"><i class='bx bx-check-square'></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Your item is shipped <span class="msg-time float-end">5 hrs
-												ago</span></h6>
-													<p class="msg-info">Successfully shipped your item</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-primary text-primary"><i class='bx bx-user-pin'></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New 24 authors<span class="msg-time float-end">1 day
-												ago</span></h6>
-													<p class="msg-info">24 new authors joined last week</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-warning text-warning"><i class='bx bx-door-open'></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2 weeks
-												ago</span></h6>
-													<p class="msg-info">45% less alerts last 4 weeks</p>
-												</div>
-											</div>
-										</a>
-									</div>
-									<a href="javascript:;">
-										<div class="text-center msg-footer">View All Notifications</div>
-									</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
-									<i class='bx bx-comment'></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:;">
-										<div class="msg-header">
-											<p class="msg-header-title">Messages</p>
-											<p class="msg-header-clear ms-auto">Marks all as read</p>
-										</div>
-									</a>
-									<div class="header-message-list">
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-1.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Daisy Anderson <span class="msg-time float-end">5 sec
-												ago</span></h6>
-													<p class="msg-info">The standard chunk of lorem</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-2.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Althea Cabardo <span class="msg-time float-end">14
-												sec ago</span></h6>
-													<p class="msg-info">Many desktop publishing packages</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-3.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Oscar Garner <span class="msg-time float-end">8 min
-												ago</span></h6>
-													<p class="msg-info">Various versions have evolved over</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-4.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Katherine Pechon <span class="msg-time float-end">15
-												min ago</span></h6>
-													<p class="msg-info">Making this the first true generator</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-5.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Amelia Doe <span class="msg-time float-end">22 min
-												ago</span></h6>
-													<p class="msg-info">Duis aute irure dolor in reprehenderit</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-6.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Cristina Jhons <span class="msg-time float-end">2 hrs
-												ago</span></h6>
-													<p class="msg-info">The passage is attributed to an unknown</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-7.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">James Caviness <span class="msg-time float-end">4 hrs
-												ago</span></h6>
-													<p class="msg-info">The point of using Lorem</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-8.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Peter Costanzo <span class="msg-time float-end">6 hrs
-												ago</span></h6>
-													<p class="msg-info">It was popularised in the 1960s</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-9.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">David Buckley <span class="msg-time float-end">2 hrs
-												ago</span></h6>
-													<p class="msg-info">Various versions have evolved over</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-10.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Thomas Wheeler <span class="msg-time float-end">2 days
-												ago</span></h6>
-													<p class="msg-info">If you are going to use a passage</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-													<img src="assets/images/avatars/avatar-11.png" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Johnny Seitz <span class="msg-time float-end">5 days
-												ago</span></h6>
-													<p class="msg-info">All the Lorem Ipsum generators</p>
-												</div>
-											</div>
-										</a>
-									</div>
-									<a href="javascript:;">
-										<div class="text-center msg-footer">View All Messages</div>
-									</a>
-								</div>
-							</li>
-						</ul>
+						
 					</div>
 					<div class="user-box dropdown">
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+							<img src="/apps/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
-								<p class="user-name mb-0">Pauline Seitz</p>
-								<p class="designattion mb-0">Web Designer</p>
+								<p class="user-name mb-0">{{Auth::user()->name}}</p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
-							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Settings</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-dollar-circle'></i><span>Earnings</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-download'></i><span>Downloads</span></a>
+							<li><a class="dropdown-item" href="/app/profile"><i class="bx bx-user"></i><span>Profile</span></a>
 							</li>
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+							<li><a class="dropdown-item" href="/auth/logout"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
 							</li>
 						</ul>
 					</div>
@@ -396,7 +70,7 @@
 		<div class="nav-container">
 			<div class="mobile-topbar-header">
 				<div>
-					<img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+					<img src="/apps/images/logo-icon.png" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
 					<h4 class="logo-text">Syndron</h4>
@@ -685,7 +359,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/chair.png" alt="" />
+												<img src="/apps/images/icons/chair.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Light Blue Chair</h6>
@@ -705,7 +379,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/user-interface.png" alt="" />
+												<img src="/apps/images/icons/user-interface.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Honor Mobile 7x</h6>
@@ -725,7 +399,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/watch.png" alt="" />
+												<img src="/apps/images/icons/watch.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Hand Watch</h6>
@@ -745,7 +419,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/idea.png" alt="" />
+												<img src="/apps/images/icons/idea.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Mini Laptop</h6>
@@ -765,7 +439,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/tshirt.png" alt="" />
+												<img src="/apps/images/icons/tshirt.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Slim-T-Shirt</h6>
@@ -785,7 +459,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/headphones.png" alt="" />
+												<img src="/apps/images/icons/headphones.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Smart Headphones</h6>
@@ -805,7 +479,7 @@
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center">
 											<div class="product-img">
-												<img src="assets/images/icons/shoes.png" alt="" />
+												<img src="/apps/images/icons/shoes.png" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1">Green Sports Shoes</h6>
@@ -853,7 +527,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-1.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Michle Jhon</h6>
@@ -871,7 +545,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-2.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-2.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Pauline Bird</h6>
@@ -889,7 +563,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-3.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Ralph Alva</h6>
@@ -907,7 +581,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-4.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from John Roman</h6>
@@ -925,7 +599,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-7.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-7.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from David Buckley</h6>
@@ -943,7 +617,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-8.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-8.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Lewis Cruz</h6>
@@ -961,7 +635,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-9.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-9.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from James Caviness</h6>
@@ -979,7 +653,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-10.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-10.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Peter Costanzo</h6>
@@ -997,7 +671,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-11.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-11.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Johnny Seitz</h6>
@@ -1015,7 +689,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-12.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-12.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Lewis Cruz</h6>
@@ -1033,7 +707,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-13.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-13.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from David Buckley</h6>
@@ -1051,7 +725,7 @@
 												<td>
 													<div class="d-flex align-items-center">
 														<div class="">
-															<img src="assets/images/avatars/avatar-14.png" class="rounded-circle" width="46" height="46" alt="" />
+															<img src="/apps/images/avatars/avatar-14.png" class="rounded-circle" width="46" height="46" alt="" />
 														</div>
 														<div class="ms-2">
 															<h6 class="mb-1 font-14">Payment from Thomas Wheeler</h6>
@@ -1209,7 +883,7 @@
 							<div class="customers-list p-3 mb-3">
 								<div class="customers-list-item d-flex align-items-center border-top border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-3.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Emy Jackson</h6>
@@ -1222,7 +896,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-4.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Martin Hughes</h6>
@@ -1235,7 +909,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-23.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-23.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Laura Madison</h6>
@@ -1248,7 +922,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-24.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-24.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Shoan Stephen</h6>
@@ -1261,7 +935,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-20.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-20.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Keate Medona</h6>
@@ -1274,7 +948,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-16.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-16.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Paul Benn</h6>
@@ -1287,7 +961,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-25.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-25.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Winslet Maya</h6>
@@ -1300,7 +974,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-11.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-11.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Bruno Bernard</h6>
@@ -1313,7 +987,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-17.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-17.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Merlyn Dona</h6>
@@ -1326,7 +1000,7 @@
 								</div>
 								<div class="customers-list-item d-flex align-items-center border-bottom p-2 cursor-pointer">
 									<div class="">
-										<img src="assets/images/avatars/avatar-7.png" class="rounded-circle" width="46" height="46" alt="" />
+										<img src="/apps/images/avatars/avatar-7.png" class="rounded-circle" width="46" height="46" alt="" />
 									</div>
 									<div class="ms-2">
 										<h6 class="mb-1 font-14">Alister Campel</h6>
@@ -1397,7 +1071,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/chair.png" alt="">
+													<img src="/apps/images/icons/chair.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">Light Blue Chair</h6>
@@ -1423,7 +1097,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/shoes.png" alt="">
+													<img src="/apps/images/icons/shoes.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">Green Sport Shoes</h6>
@@ -1449,7 +1123,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/headphones.png" alt="">
+													<img src="/apps/images/icons/headphones.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">Red Headphone 07</h6>
@@ -1475,7 +1149,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/idea.png" alt="">
+													<img src="/apps/images/icons/idea.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">Mini Laptop Device</h6>
@@ -1501,7 +1175,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/user-interface.png" alt="">
+													<img src="/apps/images/icons/user-interface.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">Purple Mobile Phone</h6>
@@ -1527,7 +1201,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/watch.png" alt="">
+													<img src="/apps/images/icons/watch.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">Smart Hand Watch</h6>
@@ -1553,7 +1227,7 @@
 										<td>
 											<div class="d-flex align-items-center">
 												<div class="recent-product-img">
-													<img src="assets/images/icons/tshirt.png" alt="">
+													<img src="/apps/images/icons/tshirt.png" alt="">
 												</div>
 												<div class="ms-2">
 													<h6 class="mb-1 font-14">T-Shirt Blue</h6>
@@ -1658,18 +1332,18 @@
 	</div>
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="/apps/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-	<script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-	<script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-	<script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
-	<script src="assets/js/index.js"></script>
+	<script src="/apps/js/jquery.min.js"></script>
+	<script src="/apps/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/apps/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/apps/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="/apps/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+	<script src="/apps/plugins/datatable/js/jquery.dataTables.min.js"></script>
+	<script src="/apps/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+	<script src="/apps/js/index.js"></script>
 	<!--app JS-->
-	<script src="assets/js/app.js"></script>
+	<script src="/apps/js/app.js"></script>
 </body>
 
 </html>

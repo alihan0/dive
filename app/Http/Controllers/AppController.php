@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class AppController extends Controller
 {
     public function app(){
-        return "asda";
+        return view('app.index');
     }
 }
