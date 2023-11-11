@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->integer('gender');
             $table->date('birthdate');
-            $table->string('username')->unique();
-            $table->string('discord');
+            $table->string('username')->unique()->nullable();
+            $table->string('discord')->nullable();
             $table->integer('status');
             $table->timestamps();
         });
