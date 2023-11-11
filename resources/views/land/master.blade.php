@@ -131,6 +131,7 @@
 									</li>
 									<li><a href="/tournaments">Tournaments</a></li>
 									<li><a href="/calendar">Calendar</a></li>
+									<li><a href="/faq">Faq</a></li>
 									<li><a href="/support">Support</a></li>
 								</ul>
 								<a href="/app/" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
@@ -252,6 +253,7 @@
 								<ul>
 									<li><a href="">About</a></li>
 									<li><a href="">Out Team</a></li>
+									<li><a href="">Faq</a></li>
 									<li><a href="">Support</a></li>
 									<li><a href="">Term of Use</a></li>
 									<li><a href="">Privacy Policy</a></li>
@@ -266,7 +268,7 @@
                                     <h4>Coming Tournaments</h4>
                                 </div>
                                 <div class="fm-item-content">
-                                    <p>No comint tournament.</p>
+                                    <p>No coming tournament.</p>
                                     
                                 </div>
                             </div>
