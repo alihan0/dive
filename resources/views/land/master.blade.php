@@ -134,7 +134,15 @@
 									<li><a href="/faq">Faq</a></li>
 									<li><a href="/support">Support</a></li>
 								</ul>
-								<a href="/app/" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
+								<a href="/app/" class="login">
+									<i class="icofont-user"></i>
+									@if (Auth::check())
+										{{Auth::user()->name}}
+									@else
+									<span>LOG IN</span>
+									@endif
+									
+								</a>
 								
 
 								<!-- toggle icons -->
