@@ -28,6 +28,9 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::get('/logout', 'logout');
     Route::get('/login/admin', 'admin_login');
     Route::post('/login/admin', 'admin_login_control');
+
+    Route::get('/verification/email', 'verification_email')->middleware('auth');
+    Route::post('/verification/verify_email', 'verify_email')->middleware('auth');
 });
 
 Route::controller(AppController::class)->prefix('app')->middleware('auth')->group(function(){

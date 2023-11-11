@@ -21,6 +21,9 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('username')->unique()->nullable();
             $table->string('discord')->nullable();
+            $table->integer('email_verification')->nullable();
+            $table->integer('discord_verification')->nullable();
+            $table->integer('gender_verification')->nullable();
             $table->integer('status');
             $table->timestamps();
         });
