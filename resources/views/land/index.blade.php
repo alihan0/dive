@@ -159,4 +159,29 @@
 	<!-- ===========About Section Ends Here========== -->
 @endif
 
+@if ($dcbanner = $sections->where('section','dcbanner')->first())
+    <!-- ===========CTA Section start Here========== -->
+	<section class="cta-section padding-bottom ">
+		<div class="container">
+			<div class="cta-wrapper item-layer ">
+				<div class="cta-item px-4 px-sm-5 py-5" style="background-image: url({{$dcbanner->cover}});">
+					<div class="row align-items-center">
+						<div class="col-lg-6">
+							<div class="cta-content">
+								<p class="theme-color text-uppercase ls-2">{!!$dcbanner->sub_title!!}</p>
+								<h2 class="mb-3">{!!$dcbanner->title!!}</h2>
+								<p class="mb-4">{!!$dcbanner->detail!!}</p>
+								<a href="{{$dcbanner->button1_src}}" class="default-button">{!!$dcbanner->button1_text!!}</a>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ===========CTA Section Ends Here========== -->
+@endif
 @endsection

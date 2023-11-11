@@ -97,7 +97,19 @@ class DatabaseSeeder extends Seeder
 
             error_log('About Section Installed.');
 
-        
+            Sections::create([
+                "page" => "index",
+                "section" => "dcbanner",
+                "title" => "Join our discord community for news",
+                "cover" => "/assets/images/cta/bg-2.jpg",
+                "sub_title" => "JOIN COMMUNITY",
+                "detail" => "Distinctively provide acces mutfuncto users whereas transparent proceses somes ncentivize eficient functionalities rather than an extensible archtectur services and cross",
+                "button1_text" => '<span>join community  <i class="icofont-play-alt-1"></i></span>',
+                "button1_src" => "#",
+                "status" => 1
+            ]);
+
+            error_log('DCBANNER Section Installed.');
         
     }
 }
