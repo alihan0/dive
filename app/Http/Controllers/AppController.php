@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
+use App\Models\TeamMember;
 use App\Models\VerificationMeeting;
+use Auth;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -49,5 +52,22 @@ class AppController extends Controller
         }else{
             return response()->json(["type" => "warning", "message" => "The meeting has not been held successfully", "status" => false]);
         }
+    }
+
+    public function team(){
+       // Kullanıcının takıma dahil olup olmadığını kontrol et
+    $userTeamMember = TeamMember::where('user', Auth::id())->first();
+
+    // Eğer kullanıcı bir takıma üye ise
+    if ($userTeamMember) {
+        // Kullanıcının dahil olduğu takımın verilerini al
+        $team = $userTeamMember->team;
+
+        // Blade'e verileri gönder
+        return view('app.team', compact('team'));
+    }
+
+    // Kullanıcı bir takıma üye değilse
+    return view('app.team', ['team' => null]);
     }
 }

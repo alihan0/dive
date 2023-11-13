@@ -34,8 +34,8 @@ class DatabaseSeeder extends Seeder
                 "gender" => 1,
                 "birthdate" => "1997-10-12",
                 "email_verification" => 1,
-                "discord_verification" => 0,
-                "gender_verification" => 0,
+                "discord_verification" => 1,
+                "gender_verification" => 1,
                 "status" => 1,
             ]);
 

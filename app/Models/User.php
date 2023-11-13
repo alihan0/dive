@@ -37,4 +37,14 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class, 'owner', 'id');
+    }
+
+    public function teamMembers()
+    {
+        return $this->hasMany(TeamMember::class, 'user', 'id');
+    }
 }
