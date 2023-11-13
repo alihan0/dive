@@ -70,4 +70,41 @@ class AppController extends Controller
     // Kullanıcı bir takıma üye değilse
     return view('app.team', ['team' => null]);
     }
+
+    public function new_team(){
+        return view('app.new_team');
+    }
+
+    public function create_team(Request $request){
+
+        $userInTeam = TeamMember::where('user', $request->id)->exists();
+
+        if ($userInTeam) {
+            return response()->json(['type'=> 'warning','message'=> 'You are already in a team']);
+        }
+
+        if(empty($request->team_name) || empty($request->team_abbreviation) || empty($request->role)){
+            return response()->json(['type'=> 'warning','message'=> 'Please Type Your Team Name, Team Abbreviation and Your Role']);
+        }
+
+        $team = new Team;
+        $team->name = $request->team_name;
+        $team->description = $request->team_description;
+        $team->abbreviation = $request->team_abbreviation;
+        $team->owner = $request->id;
+        $team->status = 1;
+        if($team->save()){
+            $member = new TeamMember;
+            $member->team = $team->id;
+            $member->user = $request->id;
+            $member->role = $request->role;
+            $member->status = 1;
+
+            if($member->save()){
+                return response()->json(['type'=> 'success','message'=> 'The team has been created successfully','status' => true]);
+            }else{
+                return response()->json(['type'=> 'warning','message'=> 'The team has not been created successfully']);
+            }
+        }
+    }
 }
