@@ -20,9 +20,23 @@ class DiscordController extends Controller
     }
 
     public function guild(){
-        
         $response = \Illuminate\Support\Facades\Http::withHeaders(['Authorization' => "Bot $this->token"])->get("$this->api_url/guilds/$this->guild");
         return $response->json();
+    }
+    public function guild_roles(){
+        $response = \Illuminate\Support\Facades\Http::withHeaders(['Authorization' => "Bot $this->token"])->get("$this->api_url/guilds/$this->guild/roles");
+        return $response->json();
+    }
 
+    public function role_control($username){
+        $response = \Illuminate\Support\Facades\Http::withHeaders(['Authorization' => "Bot $this->token"])->get("$this->api_url/guilds/$this->guild/members/search?query=$username");
+        $userData = $response->json();
+
+        if (in_array($this->role_id, $userData[0]["roles"])) {
+            return response()->json(["message" => "Verified Successfullty", "status" => true]);
+        } else {
+            return response()->json(["message" => "Verified Unsuccessfully", "status" => false]);
+        }
+    
     }
 }

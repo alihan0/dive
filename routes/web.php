@@ -69,4 +69,6 @@ Route::get('/get-user-roles/{username}', function ($username) {
 
 Route::controller(DiscordController::class)->prefix('discord')->group(function(){
    Route::get('/guild', 'guild'); 
+   Route::get('/guild/roles', 'guild_roles');
+   Route::get('/role_control/{username}', 'role_control'); 
 });
