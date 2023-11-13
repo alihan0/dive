@@ -36,35 +36,8 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
 
 Route::controller(AppController::class)->prefix('app')->middleware('auth')->group(function(){
     Route::get('/', 'app');
+    Route::get('/verification/discord', 'discord_verification');
 });
-
-
-Route::get('/get-user-roles/{username}', function ($username) {
-
-    // Replace with your actual bot token
-    $botToken = 'MTE3Mjk0MDY3NTk0MDExMDMzNg.GAWGxy.01O7gaZYDSN6QQI6sKILWVG01ZC-FP4keX0jmI';
-
-    $guildId = '1131929783119380480';
-    $discordApiUrl = 'https://discord.com/api/v10';
-    $verified_role_id = "1136912252662980658";
-
-    // Get the user ID by username
-    $userIdResponse = \Illuminate\Support\Facades\Http::withHeaders(['Authorization' => "Bot $botToken"])->get("$discordApiUrl/guilds/$guildId/members/search?query=$username");
-    $userData = $userIdResponse->json();
-
-    
-
-    if (in_array($verified_role_id, $userData[0]["roles"])) {
-        echo "İstenilen rol bulundu!";
-    } else {
-        echo "İstenilen rol bulunamadı.";
-    }
-    
-
-    //return $userData;
-
-});
-
 
 
 Route::controller(DiscordController::class)->prefix('discord')->group(function(){
