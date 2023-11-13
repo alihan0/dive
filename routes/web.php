@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,3 +65,8 @@ Route::get('/get-user-roles/{username}', function ($username) {
 
 });
 
+
+
+Route::controller(DiscordController::class)->prefix('discord')->group(function(){
+   Route::get('/guild', 'guild'); 
+});
