@@ -37,6 +37,8 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
 Route::controller(AppController::class)->prefix('app')->middleware('auth')->group(function(){
     Route::get('/', 'app');
     Route::get('/verification/discord', 'discord_verification');
+    Route::get('/verification/birthday-gender', 'birthday_gender_verification');
+    Route::post('/create-meeting', 'create_meeting');
 });
 
 
