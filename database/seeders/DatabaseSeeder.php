@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Sections;
 use App\Models\System;
+use App\Models\User;
+use Hash;
 use Illuminate\Database\Seeder;
 use Log;
 
@@ -25,6 +27,19 @@ class DatabaseSeeder extends Seeder
             System::factory(1)->create();
             error_log('System Installed.');
 
+            User::create([
+                "name" => "Alihan Öztürk",
+                "email" => "alihan@metatige.com",
+                "password" => Hash::make("alihan12"),
+                "gender" => 1,
+                "birthdate" => "1997-10-12",
+                "email_verification" => 1,
+                "discord_verification" => 0,
+                "gender_verification" => 0,
+                "status" => 1,
+            ]);
+
+            error_log("User Installed.");
 
 
             Sections::create([
