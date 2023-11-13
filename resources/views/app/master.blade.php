@@ -99,7 +99,7 @@
 						
 					</li>
 					<li>
-						<a href="/team">
+						<a href="/app/team">
 							<div class="parent-icon"><i class="fa-solid fa-people-group"></i>
 							</div>
 							<div class="menu-title">My Team</div>
@@ -107,7 +107,7 @@
 						
 					</li>
 					<li>
-						<a  href="/matches">
+						<a  href="/app/matches">
 							<div class="parent-icon"><i class="fa-solid fa-diagram-project"></i>
 							</div>
 							<div class="menu-title">My Matches</div>
