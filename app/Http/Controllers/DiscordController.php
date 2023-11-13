@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class DiscordController extends Controller
@@ -37,6 +39,24 @@ class DiscordController extends Controller
         } else {
             return response()->json(["message" => "Verified Unsuccessfully", "status" => false]);
         }
-    
+    }
+
+    public function check_role(Request $request){
+        $username = $request->username;
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+        
+        $response = \Illuminate\Support\Facades\Http::withHeaders(['Authorization' => "Bot $this->token"])->get("$this->api_url/guilds/$this->guild/members/search?query=$username");
+        $userData = $response->json();
+
+        if (in_array($this->role_id, $userData[0]["roles"])) {
+            $user->discord_verification = 1;
+            $user->gender_verification = 1;
+            if($user->save()){
+                return response()->json(["message" => "Verified Successfullty", "status" => true]);
+            }
+        } else {
+            return response()->json(["message" => "Verified Unsuccessfully", "status" => false]);
+        }
     }
 }
