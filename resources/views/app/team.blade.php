@@ -299,8 +299,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
 
-            axios.post('/app/team/remove', {
-                user: user,
+            axios.post('/app/team/leave', {
                 team: team
             })
             .then(function (res) {

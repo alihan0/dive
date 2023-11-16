@@ -66,7 +66,7 @@ class AppController extends Controller
 
     public function create_team(Request $request){
 
-        $userInTeam = TeamMember::where('user', $request->id)->exists();
+        $userInTeam = TeamMember::where('user', $request->id)->where('status',1)->exists();
 
         if ($userInTeam) {
             return response()->json(['type'=> 'warning','message'=> 'You are already in a team']);
@@ -201,6 +201,31 @@ class AppController extends Controller
             return response()->json(['type' => 'error', 'message' => 'The team has not been edited successfully']);
         }
     }
+
+    public function leave_team(Request $request)
+{
+    $team = Team::find($request->team);
+    $members = TeamMember::where('team', $request->team)->get();
+
+    if (!$team) {
+        return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+    }
+
+    $team->status = 0;
+
+    foreach ($members as $member) {
+        $member->status = 0;
+        $member->save();
+    }
+
+    if ($team->save()) {
+        return response()->json(['type' => 'success', 'message' => 'The team has been left successfully', 'status' => true]);
+    } else {
+        return response()->json(['type' => 'error', 'message' => 'The team has not been left successfully']);
+    }
+}
+
+
 
     
 }

@@ -47,6 +47,7 @@ Route::controller(AppController::class)->prefix('app')->middleware('auth')->grou
     Route::post('/team/join', 'join_team');
     Route::post('/team/remove', 'remove_team');
     Route::post('/team/edit', 'edit_team');
+    Route::post('/team/leave', 'leave_team');
 });
 
 
