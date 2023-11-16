@@ -26,11 +26,15 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <div class="mb-3">
+            <label for="inviteCode" class="form-label">Invite Code</label>
+            <input type="text" class="form-control" id="inviteCode" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Please type your team invite code.</div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="joinTeam()">Join</button>
         </div>
       </div>
     </div>
@@ -205,5 +209,17 @@
         });
     }
         
+    function joinTeam(){
+      var code = $("#inviteCode").val();
+
+      axios.post('/app/team/join', {code:code}).then((res) => {
+        toastr[res.data.type](res.data.message);
+        if(res.data.status){
+          setInterval(() => {
+            location.assign('/app/team/');
+          },500);
+        }
+      })
+    }
     </script>
 @endsection

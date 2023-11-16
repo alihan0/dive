@@ -44,6 +44,7 @@ Route::controller(AppController::class)->prefix('app')->middleware('auth')->grou
     Route::get('/team/new', 'new_team');
     Route::post('/team/create', 'create_team');
     Route::post('/team/invite', 'invite_team');
+    Route::post('/team/join', 'join_team');
 });
 
 

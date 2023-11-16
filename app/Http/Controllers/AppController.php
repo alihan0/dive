@@ -132,5 +132,34 @@ class AppController extends Controller
             return response()->json(['type'=> 'success','message'=> 'The invite code has been sent successfully', 'status' => true]);
         }
     }
+
+    public function join_team(Request $request){
+        $code = $request->code;
+
+        if(strlen($code) < 6){
+            return response()->json(['type'=> 'error','message'=> 'The code must be at least 6 characters']);
+        }
+
+        $invite = InviteCode::where('code', $code)->first();
+        if(!$invite){
+            return response()->json(['type'=> 'error','message'=> 'The code is invalid']);
+        }
+
+        if($invite->status != 1){
+            return response()->json(['type'=> 'error','message'=> 'The code has been used before.']);
+        }
+
+        $team = new TeamMember;
+        $team->team = $invite->team;
+        $team->user = Auth::user()->id;
+        $team->role = 4;
+        $team->status = 1;
+        
+        if($team->save()){
+            return response()->json(['type'=> 'success','message'=> 'The team has been joined successfully', 'status' => true]);
+        }else{
+            return response()->json(['type'=> 'error','message'=> 'The team has not been joined successfully']);
+        }
+    }
     
 }
