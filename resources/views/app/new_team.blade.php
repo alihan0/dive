@@ -55,7 +55,7 @@
                 toastr[res.data.type](res.data.message);
                 if(res.data.status){
                     setInterval(() => {
-                        location.reload();
+                        location.assign('/app/team/');
                     }, 500)
                 }
             });

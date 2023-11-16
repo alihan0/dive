@@ -15,8 +15,8 @@ class Team extends Model
     }
 
     // Team modelinin TeamMembers modeli ile ilişkisi
-    public function members()
+    public function Members()
     {
-        return $this->hasMany(TeamMember::class, 'team_id', 'id');
+        return $this->hasMany(TeamMember::class, 'team', 'id');
     }
 }

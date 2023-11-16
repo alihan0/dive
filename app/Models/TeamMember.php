@@ -9,15 +9,15 @@ class TeamMember extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function User()
     {
         return $this->belongsTo(User::class, 'user', 'id');
     }
 
     // TeamMembers modelinin Team modeli ile ilişkisi
-    public function team()
+    public function Team()
     {
-        return $this->belongsTo(Team::class, 'team_id', 'id');
+        return $this->belongsTo(Team::class, 'team', 'id');
     }
 
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('abbreviation');
             $table->integer('owner');
+            $table->string('logo')->nullable();
             $table->integer('status');
             $table->timestamps();
         });

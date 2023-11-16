@@ -55,20 +55,7 @@ class AppController extends Controller
     }
 
     public function team(){
-       // Kullanıcının takıma dahil olup olmadığını kontrol et
-    $userTeamMember = TeamMember::where('user', Auth::id())->first();
-
-    // Eğer kullanıcı bir takıma üye ise
-    if ($userTeamMember) {
-        // Kullanıcının dahil olduğu takımın verilerini al
-        $team = $userTeamMember->team;
-
-        // Blade'e verileri gönder
-        return view('app.team', compact('team'));
-    }
-
-    // Kullanıcı bir takıma üye değilse
-    return view('app.team', ['team' => null]);
+    return view('app.team', ['team' => TeamMember::where('user', Auth::id())->first()]);
     }
 
     public function new_team(){
