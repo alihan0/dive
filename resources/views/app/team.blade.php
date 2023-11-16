@@ -90,8 +90,8 @@
                                 @endif
                               </td>
                               <td>
-                                @if ($member->User->id == Auth::user()->id || $member->role == 1 || $member->role == 2 || $member->role == 3)
-                                    <a href="javascript:;" onclick="removeMember({{$member->User->id}},{{$member->team}})"><i class="fas fa-times text-danger"></i></a>
+                                @if (Auth::user()->Team->role == 1 || Auth::user()->Team->role == 2 || Auth::user()->Team->role == 3 || $member->user == Auth::user()->id)
+                                    <a href="javascript:;" onclick="removeMember({{$member->id}}, {{$member->team}})"><i class="fas fa-times text-danger"></i></a>
                                 @endif
                               </td>
                             </tr>
@@ -171,7 +171,34 @@
 @section('script')
     <script>
       window.removeMember = function(user, team) {
-        alert(user + " " + team);
+
+        Swal.fire({
+          icon: 'warning',
+          title: "Are You Sure?",
+          text: 'Are you sure you want to take him off the team? This action cannot be undone.',
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+
+            axios.post('/app/team/remove', {
+                user: user,
+                team: team
+            })
+            .then(function (res) {
+                toastr[res.data.type](res.data.message)
+                if(res.data.status){
+                  Swal.fire("Removed!", "", "success");
+                    setInterval(() => {
+                      window.location.reload();
+                    }, 500);
+                }
+            });    
+          }
+        });
+        
+        
     };
 
     function upload(team) {
@@ -221,5 +248,6 @@
         }
       })
     }
+
     </script>
 @endsection

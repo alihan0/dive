@@ -161,5 +161,29 @@ class AppController extends Controller
             return response()->json(['type'=> 'error','message'=> 'The team has not been joined successfully']);
         }
     }
+
+    public function remove_team(Request $request)
+{
+    $team = Team::find($request->team);
+
+    if (!$team) {
+        return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+    }
+
+    $member = TeamMember::where('team', $request->team)->where('user', $request->user)->where('status', 1)->first();
+
+    if (!$member) {
+        return response()->json(['type' => 'error', 'message' => 'The member does not exist']);
+    }
+
+    $delete = $member->delete();
+
+    if ($delete) {
+        return response()->json(['type' => 'success', 'message' => 'The member has been removed successfully', 'status' => true]);
+    } else {
+        return response()->json(['type' => 'error', 'message' => 'The member has not been removed successfully']);
+    }
+}
+
     
 }
