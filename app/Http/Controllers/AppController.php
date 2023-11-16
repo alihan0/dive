@@ -149,6 +149,9 @@ class AppController extends Controller
             return response()->json(['type'=> 'error','message'=> 'The code has been used before.']);
         }
 
+        $invite->status = 0;
+        $invite->save();
+
         $team = new TeamMember;
         $team->team = $invite->team;
         $team->user = Auth::user()->id;
@@ -173,7 +176,7 @@ class AppController extends Controller
     $member = TeamMember::where('team', $request->team)->where('user', $request->user)->where('status', 1)->first();
 
     if (!$member) {
-        return response()->json(['type' => 'error', 'message' => 'The member does not exist']);
+        return response()->json(['type' => 'error', 'message' => 'The member does not exist'.$request->team.$request->user]);
     }
 
     $delete = $member->delete();

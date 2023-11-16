@@ -91,7 +91,7 @@
                               </td>
                               <td>
                                 @if (Auth::user()->Team->role == 1 || Auth::user()->Team->role == 2 || Auth::user()->Team->role == 3 || $member->user == Auth::user()->id)
-                                    <a href="javascript:;" onclick="removeMember({{$member->id}}, {{$member->team}})"><i class="fas fa-times text-danger"></i></a>
+                                    <a href="javascript:;" onclick="removeMember({{$member->user}}, {{$member->team}})"><i class="fas fa-times text-danger"></i></a>
                                 @endif
                               </td>
                             </tr>
