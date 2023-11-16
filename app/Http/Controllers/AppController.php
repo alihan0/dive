@@ -57,7 +57,7 @@ class AppController extends Controller
     }
 
     public function team(){
-    return view('app.team', ['team' => TeamMember::where('user', Auth::id())->first()]);
+    return view('app.team', ['team' => TeamMember::where('user', Auth::id())->where('status', 1)->first()]);
     }
 
     public function new_team(){
@@ -165,28 +165,42 @@ class AppController extends Controller
         }
     }
 
-    public function remove_team(Request $request)
-{
-    $team = Team::find($request->team);
+    public function remove_team(Request $request){
+        $team = Team::find($request->team);
 
-    if (!$team) {
-        return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+        if (!$team) {
+            return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+        }
+
+        $member = TeamMember::where('team', $request->team)->where('user', $request->user)->where('status', 1)->first();
+
+        if (!$member) {
+            return response()->json(['type' => 'error', 'message' => 'The member does not exist'.$request->team.$request->user]);
+        }
+
+        $member->status = 0;
+
+        if ($member->save()) {
+            return response()->json(['type' => 'success', 'message' => 'The member has been removed successfully', 'status' => true]);
+        } else {
+            return response()->json(['type' => 'error', 'message' => 'The member has not been removed successfully']);
+        }
     }
 
-    $member = TeamMember::where('team', $request->team)->where('user', $request->user)->where('status', 1)->first();
+    public function edit_team(Request $request){
 
-    if (!$member) {
-        return response()->json(['type' => 'error', 'message' => 'The member does not exist'.$request->team.$request->user]);
+        $team = Team::find($request->team);
+        if (!$team) {
+            return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+        }
+
+        $team->description = $request->desc;
+        if($team->save()){
+            return response()->json(['type' => 'success', 'message' => 'The team has been edited successfully', 'status' => true]);
+        }else{
+            return response()->json(['type' => 'error', 'message' => 'The team has not been edited successfully']);
+        }
     }
-
-    $delete = $member->delete();
-
-    if ($delete) {
-        return response()->json(['type' => 'success', 'message' => 'The member has been removed successfully', 'status' => true]);
-    } else {
-        return response()->json(['type' => 'error', 'message' => 'The member has not been removed successfully']);
-    }
-}
 
     
 }

@@ -71,7 +71,7 @@
                       <tbody>
                         
                         @foreach ($team->Team->Members as $member)
-                            <tr>
+                            <tr {!! $member->status == 0 ? 'class="text-decoration-line-through text-muted" style="filter: grayscale(100%);"' : "" !!}>
                               <td>
                                 {{$member->User->name}}
                               </td>
@@ -90,8 +90,11 @@
                                 @endif
                               </td>
                               <td>
-                                @if (Auth::user()->Team->role == 1 || Auth::user()->Team->role == 2 || Auth::user()->Team->role == 3 || $member->user == Auth::user()->id)
+                                @if (Auth::user()->Team->role == 1 || Auth::user()->Team->role == 2 || Auth::user()->Team->role == 3 || $member->user == Auth::user()->id )
+                                
+                                  @if($member->status == 1)
                                     <a href="javascript:;" onclick="removeMember({{$member->user}}, {{$member->team}})"><i class="fas fa-times text-danger"></i></a>
+                                @endif
                                 @endif
                               </td>
                             </tr>
@@ -106,18 +109,18 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title border-bottom pb-3">Team Detail</h5>
-                    {{$team->Team->description}}
+                    {!! $team->Team->description !!}
                   </div>
                 </div>
               </div>
             </div>
             <hr>
-            @if ($member->role == 1 || $member->role == 2 || $member->role == 3)
+            @if (Auth::user()->Team->role == 1 || Auth::user()->Team->role == 2 || Auth::user()->Team->role == 3 || $member->user == Auth::user()->id )
 
             <a href="javascript:;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inviteMemberModal"><i class="fas fa-plus"></i> Invite Member</a>
             <a href="javascript:;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeLogoModal"><i class="fas fa-camera"></i> Change Logo</a>
-            <a href="javascript:;" class="btn btn-warning text-white"><i class="fas fa-edit"></i> Edit Description</a>
-            <a href="javascript:;" class="btn btn-danger text-white"><i class="fas fa-trash"></i> Leave Team</a>
+            <a href="javascript:;" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#editDetailModal"><i class="fas fa-edit"></i> Edit Description</a>
+            <a href="javascript:;" class="btn btn-danger text-white" onclick="leaveTeam({{$team->Team->id}})"><i class="fas fa-trash"></i> Leave Team</a>
             @endif
           </div>
         </div>
@@ -161,6 +164,29 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+   <div class="modal fade" id="editDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Team Description</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="desc" class="form-label">Description</label>
+            <textarea class="form-control" id="desc"  rows="10">{{$team->Team->description}}</textarea>
+            
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="editDetail({{$team->Team->id}})">Save</button>
         </div>
       </div>
     </div>
@@ -249,5 +275,45 @@
       })
     }
 
+    function editDetail(team){
+      var desc = $("#desc").val();
+
+      axios.post('/app/team/edit', {desc:desc, team:team}).then((res) => {
+        toastr[res.data.type](res.data.message);
+        if(res.data.status){
+          setInterval(() => {
+            location.reload();
+          }, 500);
+        }
+      })
+    }
+
+    function leaveTeam(team){
+      Swal.fire({
+          icon: 'warning',
+          title: "Warning: You're About to Disband the Team",
+          text: 'If you disband this team, all members will be automatically removed and team information will be permanently deleted. You will not be able to undo this action!',
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+
+            axios.post('/app/team/remove', {
+                user: user,
+                team: team
+            })
+            .then(function (res) {
+                toastr[res.data.type](res.data.message)
+                if(res.data.status){
+                  Swal.fire("Removed!", "", "success");
+                    setInterval(() => {
+                      window.location.reload();
+                    }, 500);
+                }
+            });    
+          }
+        });
+    }
     </script>
 @endsection
