@@ -108,12 +108,13 @@
               </div>
             </div>
             <hr>
+            @if ($member->role == 1 || $member->role == 2 || $member->role == 3)
 
             <a href="javascript:;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inviteMemberModal"><i class="fas fa-plus"></i> Invite Member</a>
             <a href="javascript:;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeLogoModal"><i class="fas fa-camera"></i> Change Logo</a>
             <a href="javascript:;" class="btn btn-warning text-white"><i class="fas fa-edit"></i> Edit Description</a>
             <a href="javascript:;" class="btn btn-danger text-white"><i class="fas fa-trash"></i> Leave Team</a>
-
+            @endif
           </div>
         </div>
         
@@ -129,11 +130,15 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <div class="mb-3">
+            <label for="inviteEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="inviteEmail" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Please type your member e-mail address. We will send a invite code.</div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="sendInvite({{$team->Team->id}})">Send</button>
         </div>
       </div>
     </div>
@@ -182,6 +187,23 @@
                     window.location.reload();
                 }
             });
-        }
+    }
+
+    function sendInvite(team){
+        var email = document.getElementById('inviteEmail').value;
+        axios.post('/app/team/invite', {
+            email: email,
+            team: team
+        })
+        .then(function (res) {
+            toastr[res.data.type](res.data.message)
+            if(res.data.status){
+                setInterval(() => {
+                  window.location.reload();
+                }, 500);
+            }
+        });
+    }
+        
     </script>
 @endsection

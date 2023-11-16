@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InviteCode;
 use App\Models\Team;
 use App\Models\TeamMember;
 use App\Models\VerificationMeeting;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AppController extends Controller
 {
@@ -94,4 +96,41 @@ class AppController extends Controller
             }
         }
     }
+
+    public function invite_team(Request $request){
+
+        if(filter_var($request->email, FILTER_VALIDATE_EMAIL) === false){
+            return response()->json(['type'=> 'error','message'=> 'Please enter a valid email']);
+        }
+
+        if (InviteCode::where('email', $request->email)->where('status', 1)->first()) {
+            return response()->json(['type'=> 'error', 'message'=> 'Already invited']);
+        }
+
+
+        $code = rand(100000, 999999);
+    
+        $invite = new InviteCode;
+        $invite->code = $code;
+        $invite->email = $request->email;
+        $invite->team = $request->team;
+        $invite->status = 1;
+    
+        if($invite->save()){
+            $data = [
+                'team' => Team::find($request->team)->name,
+                'code' => $code
+            ];
+    
+            // $request değişkenini use anahtar kelimesiyle içeriye ekleyerek erişim sağla
+            Mail::send('mail.invite_code', $data, function ($message) use ($request) {
+                $message->from(env('MAIL_USERNAME'), env('MAIL_SENDERNAME'))
+                        ->to($request->email)
+                        ->subject('Invite Code');
+            });
+
+            return response()->json(['type'=> 'success','message'=> 'The invite code has been sent successfully', 'status' => true]);
+        }
+    }
+    
 }
