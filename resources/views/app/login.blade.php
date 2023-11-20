@@ -31,7 +31,7 @@
 				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
 					<div class="col mx-auto">
 						<div class="mb-4 text-center">
-							<a href="/" ><img src="{{$system->logo_primary}}" width="180" alt="" /></a>
+							<a href="/" ><img src="{{$system->logo_primary}}" width="250" alt="" /></a>
 						</div>
 						<div class="card bg-dark shadow-none">
 							<div class="card-body">

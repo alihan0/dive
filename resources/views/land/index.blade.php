@@ -15,11 +15,8 @@
                     <div class="container">
                         <div class="row g-0">
                             <div class="col-lg-6 col-12">
-                                <div class="banner__content">
-                                    <h1>{!!$hero->title!!}</h1>
-                                    <h2>{!!$hero->sub_title!!}</h2>
-                                    <p>{!!$hero->detail!!}</p>
-                                    <a href="{{$hero->button1_src}}" class="default-button">{!!$hero->button1_text!!}</a>
+                                <div class="banner__content" style="min-height: 250px">
+                                    
                                 </div>
                             </div>
                         </div>

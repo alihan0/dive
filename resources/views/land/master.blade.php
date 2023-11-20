@@ -42,77 +42,21 @@
 
 
 	<!-- ==========Header Section Starts Here========== -->
-	<header class="header-section style2">
+	<header class="header-section style2" style="background: rgba(00,00,00,0.3)">
 		<div class="container">
 			<div class="header-holder">
 				<div class="header-menu-part">
 					<div class="header-top">
 						<div class="header-top-area">
-							<ul class="left">
-								<li>
-									<i class="icofont-ui-email"></i> <span>{{$system->email}}</span>
-								</li>
-								<li>
-									<i class="icofont-ui-call"></i> <span>{{$system->phone}}</span>
-								</li>
-							</ul>
-							<ul class="social-icons d-flex align-items-center">
-
-								@if ($system->facebook)
-								<li>
-									<a href="{{$system->facebook}}" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>
-								</li>
-								@endif
-
-								@if ($system->twitter)
-								<li>
-									<a href="{{$system->twitter}}" target="_blank" class="fb"><i class="fab fa-twitter"></i></a>
-								</li>
-								@endif
-
-								@if ($system->instagram)
-								<li>
-									<a href="{{$system->instagram}}" target="_blank" class="fb"><i class="fab fa-instagram"></i></a>
-								</li>
-								@endif
-
-								@if ($system->linkedin)
-								<li>
-									<a href="{{$system->linkedin}}" target="_blank" class="fb"><i class="fab fa-linkedin"></i></a>
-								</li>
-								@endif
-
-								@if ($system->discord)
-								<li>
-									<a href="{{$system->discord}}" target="_blank" class="fb"><i class="fab fa-discord"></i></a>
-								</li>
-								@endif
-
-								@if ($system->youtube)
-								<li>
-									<a href="{{$system->youtube}}" target="_blank" class="fb"><i class="fab fa-youtube"></i></a>
-								</li>
-								@endif
-
-								@if ($system->twitch)
-								<li>
-									<a href="{{$system->twitch}}" target="_blank" class="fb"><i class="fab fa-twitch"></i></a>
-								</li>
-								@endif
-
-								@if ($system->skype)
-								<li>
-									<a href="{{$system->skype}}" target="_blank" class="fb"><i class="fab fa-skype"></i></a>
-								</li>
-								@endif
-							</ul>
+							
+							
 						</div>
 					</div>
 					<div class="header-bottom d-flex flex-wrap justify-content-between align-items-center">
 						<div class="brand-logo d-none d-lg-inline-block">
 							<div class="logo">
 								<a href="/">
-									<img src="{{$system->logo_primary}}" alt="logo">
+									<img src="{{$system->logo_primary}}" width="250" alt="logo">
 								</a>
 							</div>
 						</div>
@@ -134,7 +78,7 @@
 									<li><a href="/faq">Faq</a></li>
 									<li><a href="/support">Support</a></li>
 								</ul>
-								<a href="/app/" class="login">
+								<a href="/app/"  style="border:2px solid #fff; border-radius:4px;padding:10px;font-weight:bold">
 									<i class="icofont-user"></i>
 									@if (Auth::check())
 										{{Auth::user()->name}}

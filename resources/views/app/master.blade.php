@@ -40,7 +40,7 @@
 				<nav class="navbar navbar-expand">
 					<div class="topbar-logo-header">
 						<div class="">
-							<img src="{{$system->logo_primary}}" class="" width="50" alt="logo icon">
+							<img src="{{$system->logo_primary}}" class="" width="200" alt="logo icon">
 						</div>
 						
 					</div>
