@@ -65,7 +65,9 @@ Route::controller(DiscordController::class)->prefix('discord')->group(function()
 Route::controller(AdminController::class)->prefix('admin')->middleware('admin')->group(function(){
     Route::get('/', 'index');
     Route::get('/account/all', 'admins');
+    Route::get('/account/new', 'new_admin');
     Route::post('/account/update', 'admin_update');
+    Route::post('/account/new', 'admin_save');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);

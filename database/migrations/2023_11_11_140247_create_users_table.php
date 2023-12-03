@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->integer('gender');
-            $table->date('birthdate');
+            $table->integer('gender')->nullable();
+            $table->date('birthdate')->nullable();
             $table->string('username')->unique()->nullable();
             $table->string('discord')->nullable();
             $table->integer('email_verification')->nullable();
