@@ -150,4 +150,8 @@ class AdminController extends Controller
     public function teams(){
         return view('admin.team', ['teams' => Team::all()]);
     }
+
+    public function calendar(){
+        return view('admin.calendar');
+    }
 }
