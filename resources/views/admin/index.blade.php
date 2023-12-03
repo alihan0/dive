@@ -1,1 +1,1 @@
-index
+@extends('admin.master')

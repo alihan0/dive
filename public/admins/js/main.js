@@ -11,49 +11,6 @@ $(document).ready(function() {
         };
     })();
 
-    const searchResults = function() {
-        $('.header-search input').on('input', function() {
-            var value = $(this).val();
-            if(value.length > 0) {
-                $('body').addClass('search-results-show');
-                $('span.search-input-value').html(value);
-            } else {
-                $('body').removeClass('search-results-show');
-            }
-            $('.search-results .search-result-list').fadeOut(1);
-            delay(function(){
-                if(!$.trim($('.header-search input').val()).length != 0) {
-                    $('.search-results .search-result-list').fadeOut(1);
-                } else {
-                    $('.search-results .search-result-list').fadeIn();
-                }
-            }, 500 );
-        });
-        
-        $(document).keyup(function(e) {
-            if($('body').hasClass('search-results-show')) {
-                if (e.keyCode === 27) {
-                    $('body').removeClass('search-results-show');
-                } // Close on escape
-            }
-        });
-        
-        $(document).mouseup(function (e){
-            var container = $(".search-results");
-            var container2 = $(".header-search input");
-            if (!container.is(e.target)
-                && !container2.is(e.target)
-                && container.has(e.target).length === 0
-                && container2.has(e.target).length === 0) {
-                $('body').removeClass('search-results-show');
-            }
-        });
-        
-        $('#closeSearch').on('click', function(){
-            $('body').removeClass('search-results-show');
-        });
-    }
-
     
 
     const sidebar = function() {
