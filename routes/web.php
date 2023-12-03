@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DiscordController;
@@ -38,6 +39,8 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
 Route::controller(AppController::class)->prefix('app')->middleware('auth')->group(function(){
     Route::get('/', 'app');
     Route::get('/verification/discord', 'discord_verification');
+    Route::get('/verification/v2/discord', 'discord_verification_v2');
+    Route::get('/verification/v2/discord/confirmation', 'discord_verification_confirmation');
     Route::get('/verification/birthday-gender', 'birthday_gender_verification');
     Route::post('/create-meeting', 'create_meeting');
     Route::get('/team', 'team');
@@ -57,3 +60,12 @@ Route::controller(DiscordController::class)->prefix('discord')->group(function()
    Route::get('/role_control/{username}', 'role_control');
    Route::post('/check_role', 'check_role'); 
 });
+
+
+Route::controller(AdminController::class)->prefix('admin')->middleware('admin')->group(function(){
+    Route::get('/', 'index');
+    
+});
+
+Route::get('/admin/login', [AdminController::class,'login']);
+Route::post('/admin/login', [AdminController::class,'login_control']);

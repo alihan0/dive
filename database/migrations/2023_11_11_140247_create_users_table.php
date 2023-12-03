@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('email_verification')->nullable();
             $table->integer('discord_verification')->nullable();
             $table->integer('gender_verification')->nullable();
+            $table->integer('is_admin')->default(0);
             $table->integer('status');
             $table->timestamps();
         });

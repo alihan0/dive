@@ -9,6 +9,9 @@ use App\Models\VerificationMeeting;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Http;
+use GuzzleHttp\Client;
+use App\Models\User;
 
 class AppController extends Controller
 {
@@ -203,29 +206,179 @@ class AppController extends Controller
     }
 
     public function leave_team(Request $request)
-{
-    $team = Team::find($request->team);
-    $members = TeamMember::where('team', $request->team)->get();
+    {
+        $team = Team::find($request->team);
+        $members = TeamMember::where('team', $request->team)->get();
 
-    if (!$team) {
-        return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+        if (!$team) {
+            return response()->json(['type' => 'error', 'message' => 'The team does not exist']);
+        }
+
+        $team->status = 0;
+
+        foreach ($members as $member) {
+            $member->status = 0;
+            $member->save();
+        }
+
+        if ($team->save()) {
+            return response()->json(['type' => 'success', 'message' => 'The team has been left successfully', 'status' => true]);
+        } else {
+            return response()->json(['type' => 'error', 'message' => 'The team has not been left successfully']);
+        }
     }
 
-    $team->status = 0;
 
-    foreach ($members as $member) {
-        $member->status = 0;
-        $member->save();
+
+    public function discord_verification_v2(){
+       return view('app.discord_verification_v2');
     }
 
-    if ($team->save()) {
-        return response()->json(['type' => 'success', 'message' => 'The team has been left successfully', 'status' => true]);
-    } else {
-        return response()->json(['type' => 'error', 'message' => 'The team has not been left successfully']);
-    }
-}
 
 
-
+    function discord_verification_confirmation(Request $request) {
     
+        $apiEndpoint = 'https://discord.com/api/v10';
+        $clientId = env('DISCORD_CLIENT_ID');
+        $clientSecret = env('DISCORD_CLIENT_SCRET');
+    
+        // Yetkilendirme sonrası yönlendirme URI'sini belirle
+        $redirectUri = 'http://127.0.0.1:8000/app/verification/v2/discord/confirmation';
+    
+        $data = [
+            'grant_type' => 'authorization_code',
+            'code' => $request->code,
+            'redirect_uri' => $redirectUri,
+        ];
+    
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+        ];
+    
+        $client = new Client();
+    
+        try {
+            $response = $client->post("$apiEndpoint/oauth2/token", [
+                'form_params' => $data,
+                'headers' => $headers,
+                'auth' => [$clientId, $clientSecret],
+            ]);
+    
+            $responseData = json_decode($response->getBody(), true);
+    
+            $accessToken = $responseData["access_token"];
+    
+            // Discord API endpoint
+            $apiEndpoint = 'https://discord.com/api/v10';
+    
+            // Guzzle HTTP client
+            $client = new Client();
+    
+            try {
+                // Kullanıcı bilgisi için istek yap
+                $response = $client->get("$apiEndpoint/users/@me", [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $accessToken,
+                    ],
+                ]);
+    
+                // Yanıtı dizi olarak al
+                $userData = json_decode($response->getBody(), true);
+    
+                // Kontrolleri yap
+                if (isset($userData['id'])) {
+                    // 1 - Bu kullanıcı benim sunucumun bir üyesi mi?
+                     $isMemberOfYourServer = $this->checkIfUserIsMemberOfYourServer($accessToken, $userData['id']);
+    
+                    // 2 - Bu kullanıcı benim sunucumda "verified" rolüne sahip mi?
+                     $hasVerifiedRole = $this->checkIfUserHasVerifiedRole($accessToken, $userData['id']);
+    
+                    // Sonuçları göster
+                    /*
+                    print_r("1 - Bu kullanıcı benim sunucumun bir üyesi mi? " . ($isMemberOfYourServer ? 'Evet' : 'Hayır') . "\n");
+                    print_r("2 - Bu kullanıcı benim sunucumda 'verified' rolüne sahip mi? " . ($hasVerifiedRole ? 'Evet' : 'Hayır') . "\n");
+                    */
+
+                    if($isMemberOfYourServer && $hasVerifiedRole){
+                        $user = User::find(Auth::user()->id);
+                        $user->discord_verification = 1;
+                        $user->gender_verification = 1;
+
+                        if($user->save()){
+                            return redirect('/app');
+                        }else{
+                            echo "Kullanıcı onaylama sırasında bir hata oluştu";
+                        }
+                    }
+
+                } else {
+                    echo 'Kullanıcı bilgileri alınamadı.' . "\n";
+                }
+    
+            } catch (\Exception $e) {
+                // Hata durumunda işlemler
+                echo 'Hata yakalandı: ', $e->getMessage(), "\n";
+            }
+    
+        } catch (\Exception $e) {
+            // Hata durumunda işlemler
+            echo 'Hata yakalandı: ', $e->getMessage(), "\n";
+        }
+    }
+    
+    private function checkIfUserIsMemberOfYourServer($accessToken, $userId) {
+        $apiEndpoint = 'https://discord.com/api/v10';
+    
+        // Sunucu ID'si
+        $serverId = env('DISCORD_GUILD_ID');
+    
+        $client = new Client();
+    
+        try {
+            $response = $client->get("$apiEndpoint/guilds/$serverId/members/$userId", [
+                'headers' => [
+                    'Authorization' => 'Bot ' . env('DISCORD_BOT_TOKEN'),
+                ],
+            ]);
+    
+            $memberData = json_decode($response->getBody(), true);
+    
+            // Kullanıcının sunucu üyesi olup olmadığını kontrol et
+            return isset($memberData['user']['id']);
+        } catch (\Exception $e) {
+            // Hata durumunda işlemler
+            echo 'Hata yakalandı: ', $e->getMessage(), "\n";
+            return false;
+        }
+    }
+
+
+    private function checkIfUserHasVerifiedRole($accessToken, $userId) {
+        $apiEndpoint = 'https://discord.com/api/v10';
+
+        // Sunucu ID'si
+        $serverId = env('DISCORD_GUILD_ID');
+
+        // Rol ID'si
+        $roleId = env('DISCORD_ROLE_ID');
+
+        $client = new Client();
+
+        try {
+            $response = $client->get("$apiEndpoint/guilds/$serverId/members/$userId", [
+                'headers' => [
+                    'Authorization' => 'Bot ' . env('DISCORD_BOT_TOKEN'),
+                ],
+            ]);
+
+            $memberData = json_decode($response->getBody(), true);
+
+            // Kullanıcının belirli bir role sahip olup olmadığını kontrol et
+            return in_array($roleId, $memberData['roles']);
+        } catch (\Exception $e) {
+            // Hata durumunda işlemler
+            echo 'Hata yakalandı: ', $e->getMessage(), "\n";
+            return false;
+        }
+    }
 }

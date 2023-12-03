@@ -149,7 +149,7 @@
 				@if (Auth::user()->discord_verification == null)
 				<div class="alert bg-primary" style="text-shadow:0 1px 1px #000" role="alert">
 					Your discord username is not verified. The discord username verification is required. Please verify your discord username.
-					<a href="/app/verification/discord" class="float-end text-white text-decoration-underline">Verify Discord Username</a>
+					<a href="/app/verification/v2/discord" class="float-end text-white text-decoration-underline">Verify Discord Username</a>
 				</div>
 				@endif
 
