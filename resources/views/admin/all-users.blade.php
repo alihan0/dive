@@ -65,7 +65,7 @@
                                 </td>
                                 <td>
                                     <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#edituser{{$user->id}}"><i class="fas fa-edit text-white"></i></a>
-                                    <a href="javascript:;" onclick="deleteuser({{$user->id}})"><i class="fas fa-trash text-white"></i></a>
+                                    <a href="javascript:;" onclick="removeUser({{$user->id}})"><i class="fas fa-trash text-white"></i></a>
                                 </td>
                               </tr>
                               <!-- Modal -->
@@ -206,8 +206,8 @@
             })
         }
 
-        function deleteuser(id){
-          axios.post('/user/account/remove', {id:id}).then((res) => {
+        function removeUser(id){
+          axios.post('/admin/user/remove', {id:id}).then((res) => {
             toastr[res.data.type](res.data.message);
             if(res.data.status){
               setInterval(() => {
