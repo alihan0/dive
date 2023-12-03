@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -144,5 +145,9 @@ class AdminController extends Controller
         $admin->delete();
 
         return response()->json(["type" => "success", "message" => "User removed successfully.", "status" => true]);
+    }
+
+    public function teams(){
+        return view('admin.team', ['teams' => Team::all()]);
     }
 }

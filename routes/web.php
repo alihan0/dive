@@ -73,6 +73,8 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::get('/user/all', 'all_user');
     Route::post('/user/update', 'update_user');
     Route::post('/user/remove', 'remove_user');
+
+    Route::get('/team', 'teams');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);
