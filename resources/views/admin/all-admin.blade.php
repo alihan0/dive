@@ -109,6 +109,16 @@
                 }
             })
         }
-        
+
+        function deleteAdmin(id){
+          axios.post('/admin/account/remove', {id:id}).then((res) => {
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+              setInterval(() => {
+                window.location.reload();
+              }, 500);
+            }
+          });
+        }
     </script>
 @endsection

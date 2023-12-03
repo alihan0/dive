@@ -68,6 +68,7 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::get('/account/new', 'new_admin');
     Route::post('/account/update', 'admin_update');
     Route::post('/account/new', 'admin_save');
+    Route::post('/account/remove', 'remove_admin');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);

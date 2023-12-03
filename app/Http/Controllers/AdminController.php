@@ -104,4 +104,11 @@ class AdminController extends Controller
 
         return response()->json(["type" => "success", "message" => "Admin added successfully.", "status" => true]);
     }
+
+    public function remove_admin(Request $request){
+        $admin = User::find($request->id);
+        $admin->delete();
+
+        return response()->json(["type" => "success", "message" => "Admin removed successfully.", "status" => true]);
+    }
 }
