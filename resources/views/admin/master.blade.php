@@ -63,7 +63,6 @@
                 <ul class="">
                     <li class="sidebar-title text-center">Users</li>
                   <li><a href="/admin/user/all"><i class="far fa-circle"></i>All Users</a></li>
-                  <li><a href="/admin/user/new"><i class="far fa-circle"></i>New User</a></li>
                 </ul>
               </li>
               <li>

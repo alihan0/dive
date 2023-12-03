@@ -111,4 +111,31 @@ class AdminController extends Controller
 
         return response()->json(["type" => "success", "message" => "Admin removed successfully.", "status" => true]);
     }
+
+    public function all_user(){
+        return view('admin.all-users', ['users' => User::where('is_admin',0)->get()]);
+    }
+
+    public function update_user(Request $request){
+        if(empty($request->name) || empty($request->email)){
+            return response()->json(["type" => "warning", "message" => "Please fill name and email fields"]);
+        }
+
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return response()->json(["type" => "warning", "message" => "Please enter a valid email."]);
+        }
+
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->gender = $request->gender;
+        $user->birthdate = $request->birthdate;
+        $user->email_verification = $request->emailVerification;
+        $user->discord_verification = $request->discordVerification;
+        $user->gender_verification = $request->genderVerification;
+        $user->save();
+
+        return response()->json(["type" => "success", "message" => "User updated successfully.", "status" => true]);
+    }
 }
