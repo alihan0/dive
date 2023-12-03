@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -44,4 +45,29 @@ class AdminController extends Controller
         return response()->json(["type" => "error", "message" => "Invalid credentials."]);
     }
     
+    public function admins(){
+        return view('admin.all-admin', ['admins' => User::where('is_admin', 1)->get()]);
+    }
+
+    public function admin_update(Request $request){
+        if(empty($request->name) || empty($request->email) || empty($request->phone)){
+            return response()->json(["type" => "warning", "message" => "Please fill all fields."]);
+        }
+
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return response()->json(["type" => "warning", "message" => "Please enter a valid email."]);
+        }
+
+        if(!is_numeric($request->phone)){
+            return response()->json(["type" => "warning", "message" => "Please enter a valid phone number."]);
+        }
+
+        $admin = User::find($request->id);
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->phone = $request->phone;
+        $admin->save();
+
+        return response()->json(["type" => "success", "message" => "Admin updated successfully.", "status" => true]);
+    }
 }

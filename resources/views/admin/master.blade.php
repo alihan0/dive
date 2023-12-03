@@ -26,6 +26,7 @@
         <link href="/admins/css/main.min.css" rel="stylesheet">
         <link href="/admins/css/custom.css" rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -94,7 +95,7 @@
               
               
             </ul>
-            <a href="#" id="sidebar-collapsed-toggle"><i data-feather="arrow-right"></i></a>
+            
         </div>
           
             <div class="page-content">
@@ -139,6 +140,8 @@
         <script src="/admins/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
         <script src="/admins/plugins/pace/pace.min.js"></script>
         <script src="/admins/js/main.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
         @yield('script')
     </body>
 </html>
