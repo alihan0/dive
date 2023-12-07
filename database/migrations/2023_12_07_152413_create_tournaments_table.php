@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('max_participants');
-            $table->integer('min_participants');
             $table->dateTime('start_at');
             $table->dateTime('end_at');
             $table->integer('status');
             $table->integer('created_by');
             $table->integer('supervisor');
+            $table->integer('is_published');
             $table->timestamps();
         });
     }

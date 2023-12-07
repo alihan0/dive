@@ -8,6 +8,7 @@ use Auth;
 use Hash;
 use App\Models\User;
 use App\Models\Tournament;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -158,5 +159,62 @@ class AdminController extends Controller
 
     public function all_tournaments(){
         return view('admin.all-tournaments', ['tournaments' => Tournament::all()]);
+    }
+
+    public function new_tournament(){
+        return view('admin.new-tournament', ['users'=>User::where('is_admin',1)->get()]);
+    }
+
+    public function create_tournament(Request $request){
+        if(empty($request->type) || empty($request->description) || empty($request->start_at_date) || empty($request->start_at_time) || empty($request->title) || empty($request->end_at_date) || empty($request->end_at_time) || empty($request->supervisor) || empty($request->max_participant)){
+            return response()->json(["type" => "warning", "message" => "Please fill all fields."]);
+        }
+
+        $startAt = Carbon::parse($request->start_at_date . ' ' . $request->start_at_time);
+        $endAt = Carbon::parse($request->end_at_date . ' ' . $request->end_at_time);
+
+        // 1 - Bitiş zamanı başlama zamanından küçük olamaz
+        if ($endAt <= $startAt) {
+            return response()->json(["type" => "warning", "message" => "End time must be greater than start time."]);
+        }
+
+        // 2 - Başlama zamanı günümüzden geçmiş olamaz
+        if ($startAt->isPast()) {
+            return response()->json(["type" => "warning", "message" => "Start time cannot be in the past."]);
+        }
+
+        // 3 - Bitiş zamanı günümüzden geçmiş olamaz
+        if ($endAt->isPast()) {
+            return response()->json(["type" => "warning", "message" => "End time cannot be in the past."]);
+        }
+
+        // 4 - Başlama zamanı günümüzden en az 10 gün sonra olmalı
+        $tenDaysLater = now()->addDays(10);
+        if ($startAt->lessThan($tenDaysLater)) {
+            return response()->json(["type" => "warning", "message" => "Start time must be at least 10 days later."]);
+        }
+
+        // 5 - Bitiş zamanı başlama zamanından en az 5 gün sonra olmalı
+        $fiveDaysLater = $startAt->addDays(5);
+        if ($endAt->lessThan($fiveDaysLater)) {
+            return response()->json(["type" => "warning", "message" => "End time must be at least 5 days later than start time."]);
+        }
+
+        $tournament = new Tournament();
+        $tournament->title = $request->title;
+        $tournament->description = $request->description;
+        $tournament->start_at = $startAt;
+        $tournament->end_at = $endAt;
+        $tournament->supervisor = $request->supervisor;
+        $tournament->max_participants = $request->max_participant;
+        $tournament->type = $request->type;
+        $tournament->status = 1;
+        $tournament->created_by = Auth::user()->id;
+        $tournament->is_published = 0;
+        if($tournament->save()){
+            return response()->json(["type" => "success", "message" => "Tournament created successfully.", "status" => true, 'tournament_id' => $tournament->id]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Something went wrong.", "status" => false]);
+        }
     }
 }
