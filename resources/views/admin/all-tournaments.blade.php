@@ -29,14 +29,44 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Type</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Title</th>
                             <th scope="col">Description</th>
                             <th scope="col">Max Participant</th>
                             <th scope="col">Start/End</th>
+                            <th scope="col">Status</th>
                             <th scope="col">@</th>
                           </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            @foreach ($tournaments as $item)
+                                <tr>
+                                    <td>
+                                        {{$item->id}}
+                                    </td>
+                                    <td>
+                                        <span class="btn btn-outline-{{ $item->type_info['color'] }}">{{ $item->type_info['title'] }}</span>
+                                    </td>
+                                    <td>
+                                        {{$item->title}}
+                                    </td>
+                                    <td>
+                                        {{$item->description}}
+                                    </td>
+                                    <td>
+                                        {{$item->max_participants}}
+                                    </td>
+                                    <td>
+                                        {{ \Carbon\Carbon::parse($item->start_at)->format('d.m.Y H:i') }} - {{ \Carbon\Carbon::parse($item->end_at)->format('d.m.Y H:i') }}
+                                    </td>
+                                    <td>
+                                        <span class="btn btn-outline-{{ $item->status_info['color'] }}">{{ $item->status_info['title'] }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/tournament/detail/{{$item->id}}"><i class="fas fa-eye text-white"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                       </table>
                 </div>
             </div>
