@@ -82,7 +82,7 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::get('/tournament/all', 'all_tournaments');
     Route::get('/tournament/new', 'new_tournament');
     Route::post('/tournament/create', 'create_tournament');
-    Route::post('/tournament/update', 'update_tournament');
+    Route::get('/tournament/active', 'active_tournaments');
     Route::post('/tournament/remove', 'remove_tournament');
 });
 

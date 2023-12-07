@@ -1,19 +1,19 @@
 @extends('admin.master')
 
-@section('title', 'All Tournaments')
+@section('title', 'Active Tournaments')
     
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body border-bottom align-items-center self-center d-flex justify-content-between">
-                    <h4 class="card-title ">All Tournaments</h4>
+                    <h4 class="card-title ">Active Tournaments</h4>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                         
                         <a href="/admin/tournament/applications" class="btn btn-outline-danger">Applications</a>
-                        <a href="/admin/tournament/active" class="btn btn-outline-danger">Active</a>
+                        <a href="/admin/tournament/active" class="btn btn-outline-danger active">Active</a>
                         <a href="/admin/tournament/pending" class="btn btn-outline-danger">Pending</a>
-                        <a href="/admin/tournament/all" class="btn btn-outline-danger active">All</a>
+                        <a href="/admin/tournament/all" class="btn btn-outline-danger ">All</a>
                         <a href="/admin/tournament/new" class="btn btn-outline-danger">New</a>
                     </div>
                 </div>
@@ -65,6 +65,7 @@
                                     <td>
                                         <span class="btn btn-outline-{{ $item->publish_info['color'] }}">{{ $item->publish_info['title'] }}</span>
                                     </td>
+                                    
                                     <td>
                                         <a href="/admin/tournament/detail/{{$item->id}}"><i class="fas fa-eye text-white"></i></a>
                                     </td>

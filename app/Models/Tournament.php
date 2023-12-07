@@ -9,7 +9,7 @@ class Tournament extends Model
 {
     use HasFactory;
 
-    protected $appends = ['type_info', 'status_info'];
+    protected $appends = ['type_info', 'status_info', 'publish_info'];
     public function getTypeInfoAttribute()
     {
         $typeInfos = [
@@ -56,4 +56,21 @@ class Tournament extends Model
 
         return $statusInfo[$this->status] ?? null;
     }
+
+    public function getPublishInfoAttribute()
+{
+    $publishInfo = [
+        0 => [
+            "title" => "unPublished",
+            "color" => "danger",
+        ],
+        1 => [
+            "title" => "Published",
+            "color" => "success",
+        ]
+    ];
+
+    return $publishInfo[$this->is_published] ?? null;
+}
+
 }

@@ -161,6 +161,10 @@ class AdminController extends Controller
         return view('admin.all-tournaments', ['tournaments' => Tournament::all()]);
     }
 
+    public function active_tournaments(){
+        return view('admin.active-tournaments', ['tournaments' => Tournament::where('status',2)->get()]);
+    }
+
     public function new_tournament(){
         return view('admin.new-tournament', ['users'=>User::where('is_admin',1)->get()]);
     }
