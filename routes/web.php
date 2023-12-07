@@ -5,6 +5,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,6 +78,12 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::get('/team', 'teams');
 
     Route::get('/calendar', 'calendar');
+
+    Route::get('/tournament/all', 'all_tournaments');
+    Route::get('/tournament/new', 'new_tournament');
+    Route::post('/tournament/create', 'create_tournament');
+    Route::post('/tournament/update', 'update_tournament');
+    Route::post('/tournament/remove', 'remove_tournament');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);

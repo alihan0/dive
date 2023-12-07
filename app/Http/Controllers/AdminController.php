@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use App\Models\User;
+use App\Models\Tournament;
 
 class AdminController extends Controller
 {
@@ -153,5 +154,9 @@ class AdminController extends Controller
 
     public function calendar(){
         return view('admin.calendar');
+    }
+
+    public function all_tournaments(){
+        return view('admin.all-tournaments', ['tournaments' => Tournament::all()]);
     }
 }
