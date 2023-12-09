@@ -225,4 +225,19 @@ class AdminController extends Controller
             return response()->json(["type" => "error", "message" => "Something went wrong.", "status" => false]);
         }
     }
+
+    public function detail_tournament($id){
+        $tournament = Tournament::find($id);
+        return view('admin.detail-tournament', ['tournament' => $tournament]);
+    }
+
+    public function set_publish(Request $request){
+        $t = Tournament::find($request->id);
+        if($t->is_published !== $request->status){
+            $t->is_published = $request->status;
+            if($t->save()){
+                return response()->json(["type" => "success", "message" => "Tournament status updated successfully.", "status" => true]);   
+            }
+        }
+    }
 }

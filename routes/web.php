@@ -84,6 +84,9 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::post('/tournament/create', 'create_tournament');
     Route::get('/tournament/active', 'active_tournaments');
     Route::get('/tournament/pending', 'pending_tournaments');
+    Route::get('/tournament/detail/{id}', 'detail_tournament');
+
+    Route::post('/tournament/setPublish', 'set_publish');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);
