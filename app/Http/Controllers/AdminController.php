@@ -236,6 +236,16 @@ class AdminController extends Controller
         if($t->is_published !== $request->status){
             $t->is_published = $request->status;
             if($t->save()){
+                return response()->json(["type" => "success", "message" => "Tournament publish status updated successfully.", "status" => true]);   
+            }
+        }
+    }
+
+    public function set_status(Request $request){
+        $t = Tournament::find($request->id);
+        if($t->status !== $request->status){
+            $t->status = $request->status;
+            if($t->save()){
                 return response()->json(["type" => "success", "message" => "Tournament status updated successfully.", "status" => true]);   
             }
         }

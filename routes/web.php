@@ -87,6 +87,7 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::get('/tournament/detail/{id}', 'detail_tournament');
 
     Route::post('/tournament/setPublish', 'set_publish');
+    Route::post('/tournament/setStatus', 'set_status');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);
