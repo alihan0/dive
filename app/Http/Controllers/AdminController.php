@@ -250,4 +250,11 @@ class AdminController extends Controller
             }
         }
     }
+
+    public function remove(Request $request){
+        $t = Tournament::find($request->id);
+        if($t->delete()){
+            return response()->json(["type" => "success", "message" => "Tournament removed successfully.", "status" => true]);   
+        }
+    }
 }

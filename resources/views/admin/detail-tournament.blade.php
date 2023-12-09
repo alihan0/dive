@@ -160,5 +160,16 @@
                 }
             })
         }
+
+        function remove(id){
+            axios.post('/admin/tournament/remove', {id:id}).then((res) => {
+                toastr[res.data.type](res.data.message);
+                if(res.data.status){
+                    setInterval(() => {
+                        window.location.assign('/admin/tournament/all');
+                    }, 500);
+                }
+            })
+        }
     </script>
 @endsection
