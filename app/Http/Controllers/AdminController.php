@@ -200,18 +200,6 @@ class AdminController extends Controller
             return response()->json(["type" => "warning", "message" => "End time cannot be in the past."]);
         }
 
-        // 4 - Başlama zamanı günümüzden en az 10 gün sonra olmalı
-        $tenDaysLater = now()->addDays(10);
-        if ($startAt->lessThan($tenDaysLater)) {
-            return response()->json(["type" => "warning", "message" => "Start time must be at least 10 days later."]);
-        }
-
-        // 5 - Bitiş zamanı başlama zamanından en az 5 gün sonra olmalı
-        $fiveDaysLater = $startAt->addDays(5);
-        if ($endAt->lessThan($fiveDaysLater)) {
-            return response()->json(["type" => "warning", "message" => "End time must be at least 5 days later than start time."]);
-        }
-
         $tournament = new Tournament();
         $tournament->title = $request->title;
         $tournament->description = $request->description;
@@ -220,6 +208,8 @@ class AdminController extends Controller
         $tournament->supervisor = $request->supervisor;
         $tournament->max_participants = $request->max_participant;
         $tournament->type = $request->type;
+        $tournament->cover = $request->cover;
+        $tournament->round = $request->round;
         $tournament->status = 1;
         $tournament->created_by = Auth::user()->id;
         $tournament->is_published = 0;

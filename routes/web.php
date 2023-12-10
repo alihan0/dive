@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(MainController::class)->group(function () {
     Route::get('/', 'index');
     Route::post('/upload', 'upload');
+    Route::post('/upload/cover', 'upload_cover');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function () {

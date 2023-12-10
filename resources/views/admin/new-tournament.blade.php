@@ -52,6 +52,12 @@
                                         <textarea name="description" id="description" class="form-control" rows="7"></textarea>
                                         <div id="titleHelp" class="form-text">Type tournament description.</div>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="cover" class="form-label">Tournament Cover</label>
+                                        <input type="file" class="form-control" id="cover" onchange="upload()">
+                                        <input type="hidden" name="cover" id="cover_data">
+                                        <div id="titleHelp" class="form-text">Choose tournament cover img.</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -91,6 +97,13 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label for="round" class="form-label">Round Count</label>
+                                        <input type="number" id="round" class="form-control" name="round">
+                                        <div id="roundHelp" class="form-text">Determine how many rounds the tournament will be played.
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label for="supervisor" class="form-label">Supervisor</label>
                                         <select name="supervisor" id="supervisor" class="form-control mb-2">
                                             <option value="0">Choose...</option>
@@ -100,6 +113,7 @@
                                         </select>
                                         <div id="typeHelp" class="form-text">Appoint a proctor for the tournament.</div>
                                     </div>
+
     
                                     <div class="mb-3">
                                         <button class="btn btn-primary float-end" onclick="createTournament()"><i class="fas fa-plus"></i> Create</button>
@@ -127,5 +141,23 @@ function createTournament(){
         }
     })
 }
+
+function upload() {
+        var formData = new FormData();
+        var fileInput = document.getElementById('cover');
+        formData.append('cover', fileInput.files[0]);
+        axios.post('/upload/cover', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(function (res) {
+            toastr[res.data.type](res.data.message)
+            if(res.data.status){
+                $("#cover_data").val(res.data.url)
+            }
+        });
+}
+
 </script>    
 @endsection

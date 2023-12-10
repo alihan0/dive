@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('max_participants');
             $table->dateTime('start_at');
             $table->dateTime('end_at');
+            $table->string('cover');
+            $table->integer('round');
             $table->integer('status');
             $table->integer('created_by');
             $table->integer('supervisor');

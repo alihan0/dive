@@ -29,4 +29,17 @@ class MainController extends Controller
         }
         return response()->json(["type" => "warning", "message" => "Dosya yüklenirken bir hata oluştu."], 500);
     }
+
+    public function upload_cover(Request $request){
+        if ($request->hasFile('cover')) {
+            $path = $request->file('cover')->store('public/uploads');
+            $url = asset(str_replace('public', 'storage', $path));
+
+                return response()->json(["type" => "success", "message" => "Kapak başarıyla yüklendi", "url" => $url, "status" => true], 200);
+            
+
+            
+        }
+        return response()->json(["type" => "warning", "message" => "Dosya yüklenirken bir hata oluştu."], 500);
+    }
 }
