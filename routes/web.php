@@ -76,6 +76,7 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::post('/user/remove', 'remove_user');
 
     Route::get('/team', 'teams');
+    Route::get('/team/detail/{id}', 'team_detail');
 
     Route::get('/calendar', 'calendar');
 

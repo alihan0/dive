@@ -153,6 +153,10 @@ class AdminController extends Controller
         return view('admin.team', ['teams' => Team::all()]);
     }
 
+    public function team_detail($id){
+        return view('admin.team-detail', ['team' => Team::find($id)]);
+    }
+
     public function calendar(){
         return view('admin.calendar');
     }

@@ -24,7 +24,7 @@
                                     {{$team->id}}
                                 </td>
                                 <td>
-                                    {{$team->logo}}
+                                    <img src="{{$team->logo}}" alt="" width="50">
                                 </td>
                                 <td>
                                     {{$team->abbrevation}}
@@ -36,9 +36,11 @@
                                     {{$team->description}}
                                 </td>
                                 <td>
-                                    {{$team->owner}}
+                                    {{$team->ownerUser->name}}
                                 </td>
-
+                                <td>
+                                  <a href="/admin/team/detail/{{$team->id}}"><i class="fas fa-eye"></i></a>
+                                </td>
                               </tr>
                           @endforeach
                         </tbody>
