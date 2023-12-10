@@ -11,7 +11,7 @@
                   <p class="card-text">{{$t->description}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="/app/tournament/{{ $t->id }}" class="btn btn-sm btn-outline-secondary">View</a>
+                      <a href="/app/tournament/detail/{{ $t->id }}" class="btn btn-sm btn-outline-secondary">View</a>
                       
                     </div>
                     <small class="text-body-secondary">Start: <b>{{\Carbon\Carbon::parse($t->start_date)->format('d/m/Y')}}</b></small>

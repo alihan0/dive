@@ -386,4 +386,8 @@ class AppController extends Controller
     public function tournaments(){
         return view('app.tournaments', ['tournaments' => Tournament::all()]);
     }
+
+    public function tournament_detail($id){
+        return view('app.tournament_detail', ['tournament' => Tournament::find($id)]);
+    }
 }

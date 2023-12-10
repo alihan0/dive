@@ -54,6 +54,7 @@ Route::controller(AppController::class)->prefix('app')->middleware('auth')->grou
     Route::post('/team/leave', 'leave_team');
 
     Route::get('/tournaments', 'tournaments');
+    Route::get('/tournament/detail/{id}', 'tournament_detail');
 });
 
 
