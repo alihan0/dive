@@ -6,6 +6,7 @@ use App\Models\InviteCode;
 use App\Models\Team;
 use App\Models\TeamMember;
 use App\Models\VerificationMeeting;
+use App\Models\Tournament;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -380,5 +381,9 @@ class AppController extends Controller
             echo 'Hata yakalandı: ', $e->getMessage(), "\n";
             return false;
         }
+    }
+
+    public function tournaments(){
+        return view('app.tournaments', ['tournaments' => Tournament::all()]);
     }
 }
