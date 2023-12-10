@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Sections;
 use App\Models\System;
+use App\Models\Team;
+use App\Models\TeamMember;
 use App\Models\User;
 use Hash;
 use Illuminate\Database\Seeder;
@@ -36,8 +38,12 @@ class DatabaseSeeder extends Seeder
                 "email_verification" => 1,
                 "discord_verification" => 1,
                 "gender_verification" => 1,
+                "is_admin" => 1,
                 "status" => 1,
             ]);
+
+            User::factory(20)->create();
+            Team::factory(50)->create();
 
             error_log("User Installed.");
 
@@ -135,6 +141,11 @@ class DatabaseSeeder extends Seeder
             ]);
 
             error_log('Teams Section Installed.');
+
+       
+            User::factory()->count(20)->create();
+            Team::factory()->count(10)->create();
+            TeamMember::factory()->count(20)->create();
         
     }
 }
