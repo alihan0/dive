@@ -389,7 +389,7 @@ class AppController extends Controller
     }
 
     public function tournament_detail($id){
-        return view('app.tournament_detail', ['tournament' => Tournament::find($id)]);
+        return view('app.tournament_detail', ['tournament' => Tournament::find($id), 'participants' => TournamentParticipant::where('status',1)->get()]);
     }
 
     public function apply_tournament(Request $request){
