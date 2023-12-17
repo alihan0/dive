@@ -35,7 +35,7 @@
                 <div class="profile-header-menu">
                     <ul class="list-unstyled">
                         <li><a href="javascript:;" class="active">Max Participant: <b>{{$tournament->max_participants}}</b></a></li>
-                        <li><a href="javascript:;" class="active">Current Participant: <b>0</b> </a></li>
+                        <li><a href="javascript:;" class="active">Current Participant: <b>{{$participants->count()}}</b> </a></li>
                         <li><a href="javascript:;" class="active">Status: {{$tournament->status_info['title']}}</a></li>
                         <li><a href="javascript:;" class="active">Current Round: <b>1</b></a></li>
                     </ul>
@@ -100,29 +100,28 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Team</th>
+                            <th scope="col">Owner</th>
+                            <th scope="col">Member</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
+                            @foreach ($participants as $p)
+                                <tr>
+                                    <td>
+                                        {{$p->id}}
+                                    </td>
+                                    <td>
+                                        [{{$p->Team->abbreviation}}] - {{$p->Team->name}}
+                                    </td>
+                                    <td>
+                                        {{$p->Team->ownerUser->name}}
+                                    </td>
+                                    <td>
+                                        {{$p->Team->members->count()}}
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                       </table>
                   </div>

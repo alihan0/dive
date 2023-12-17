@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\TournamentParticipant;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -222,7 +223,7 @@ class AdminController extends Controller
 
     public function detail_tournament($id){
         $tournament = Tournament::find($id);
-        return view('admin.detail-tournament', ['tournament' => $tournament]);
+        return view('admin.detail-tournament', ['tournament' => $tournament, 'participants' => TournamentParticipant::where('tournament',$id)->where('status',1)->get()]);
     }
 
     public function set_publish(Request $request){
