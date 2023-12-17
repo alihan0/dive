@@ -9,7 +9,7 @@
 	<link rel="icon" href="{{$system->favicon}}" type="image/png" />
 	<!--plugins-->
 	<link href="/apps/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-	<link href="/apps/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<!--plugins--<link href="/apps/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />plugins-->
 	<link href="/apps/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 	<link href="/apps/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 	<!-- loader-->
@@ -182,8 +182,8 @@
 	<script src="/apps/js/jquery.min.js"></script>
 	<script src="/apps/plugins/simplebar/js/simplebar.min.js"></script>
 	<script src="/apps/plugins/metismenu/js/metisMenu.min.js"></script>
-	<script src="/apps/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-	<script src="/apps/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+	<!--plugins--<script src="/apps/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>-plugins-->
+<!--plugins--	<script src="/apps/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>-plugins-->
 	<script src="/apps/plugins/datatable/js/jquery.dataTables.min.js"></script>
 	<script src="/apps/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
 	<script src="/apps/js/index.js"></script>

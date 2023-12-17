@@ -8,11 +8,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="assets/images/avatars/avatar-2.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <img src="{{$tournament->cover}}" alt="Admin" class="w-100" height="225">
                             <div class="mt-3">
                                 <h4>{{$tournament->title}}</h4>
                                 <p class="text-secondary mb-4">{{$tournament->description}}</p>
-                                <button class="btn btn-primary">Apply</button>
+                                <button class="btn btn-primary" onclick="applyTournament({{$tournament->id}})">Apply</button>
                             </div>
                         </div>
                         <hr class="my-4" />
@@ -35,7 +35,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">Round</h6>
-                                <span class="text-secondary">0</span>
+                                <span class="text-secondary">{{$tournament->round}}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">Status</h6>
@@ -46,39 +46,55 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="d-flex align-items-center mb-3">Participants</h5>
-
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Team</th>
-                                <th scope="col">Owner</th>
-                                <th scope="col">Member</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="d-flex align-items-center mb-3">Participants</h5>
+        
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Team</th>
+                                        <th scope="col">Owner</th>
+                                        <th scope="col">Member</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">3</th>
+                                        <td colspan="2">Larry the Bird</td>
+                                        <td>@twitter</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="d-flex align-items-center mb-3">Bracket</h5>
+        
+                                <div id="minimal" class="demo"></div>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -88,4 +104,21 @@
 </div>
 </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+
+    function applyTournament(id){
+        axios.post('/app/tournament/apply', {id:id}).then((res)=>{
+            toastr[res.data.type](res.data.message)
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        });
+    }
+
+</script>
 @endsection

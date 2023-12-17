@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InviteCode;
 use App\Models\Team;
 use App\Models\TeamMember;
+use App\Models\TournamentParticipant;
 use App\Models\VerificationMeeting;
 use App\Models\Tournament;
 use Auth;
@@ -389,5 +390,45 @@ class AppController extends Controller
 
     public function tournament_detail($id){
         return view('app.tournament_detail', ['tournament' => Tournament::find($id)]);
+    }
+
+    public function apply_tournament(Request $request){
+        $id = $request->id; // tournament id
+        $user = Auth::user();
+        $team_id =  $user->Team->team;
+        $members = TeamMember::where('team',$team_id)->where('status',1)->get();
+       
+        foreach ($members as $member) {
+            if($member->user == $user->id){
+                if( $member->role != 1  && $member->role != 2 && $member->role != 3){
+                    return response()->json(["type" => "warning", "message" => "You are not authorized for this operation."]);
+                }
+            }
+            if($member->User->email_verification != 1 || $member->User->discord_verification != 1 || $member->User->gender_verification != 1){
+                return response()->json(["type" => "warning", "message" => "Some members have not been verified."]);
+            }
+        }
+
+        $applies = TournamentParticipant::where('tournament', $id)->where('round',1)->where("team", $team_id)->get();
+
+        if($applies){
+            return response()->json(["type" => "warning", "message" => "You have already applied."]);
+        }
+
+        $apply = new TournamentParticipant;
+        $apply->tournament = $id;
+        $apply->round = 1;
+        $apply->team = $team_id;
+        $apply->status = 1;
+
+        if($apply->save()){
+            return response()->json(["type" => "success", "message" => "Your tournament registration has been received.", "status" => true]);
+        }else{
+            return response()->json(["type" => "warning", "message" => "Something went wrong..."]);
+        }
+        
+
+        
+
     }
 }

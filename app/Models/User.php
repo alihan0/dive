@@ -52,5 +52,6 @@ class User extends Authenticatable
         return $this->hasOne(TeamMember::class, 'user', 'id');
     }
 
+
     
 }
