@@ -26,7 +26,7 @@
 
     <div class="row">
         <div class="col-xl-12">
-            <div class="profile-cover"></div>
+            <div class="profile-cover" style="background: url({{$tournament->cover}})"></div>
             <div class="profile-header">
                 
                 <div class="profile-name">
