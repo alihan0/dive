@@ -346,4 +346,23 @@ class AdminController extends Controller
 
         }
     }
+
+    public function set_winner(Request $request){
+        $match = $request->match;
+        $winner = $request->winner;
+
+        $m = TournamentMatches::find($match);
+        if($m){
+            $m->winner = $winner;
+            $m->status = 2;
+            if($m->save()){
+                return response()->json(["type" => "success", "message" => "Winner determined
+                ", "status" => true]); 
+            }else{
+                return response()->json(["type" => "warning", "message" => "System Error"]);
+            }
+        }else{
+            return response()->json(["type" => "warning", "message" => "Match not found!"]);
+        }
+    }
 }

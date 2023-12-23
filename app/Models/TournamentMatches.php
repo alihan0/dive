@@ -9,7 +9,7 @@ class TournamentMatches extends Model
 {
     use HasFactory;
 
-    protected $appends = ['type_info', 'status_info', 'publish_info'];
+    protected $appends = ['winner_info', 'status_info'];
     public function getStatusInfoAttribute(){
         $statusInfo = [
             1 => [
@@ -23,6 +23,25 @@ class TournamentMatches extends Model
         ];
 
         return $statusInfo[$this->status] ?? null;
+    }
+
+    public function getWinnerInfoAttribute(){
+        $statusInfo = [
+            0 => [
+                "title" => "Pending",
+                "color" => "warning",
+            ],
+            1 => [
+                "title" => "Team 1",
+                "color" => "primary",
+            ],
+            2 => [
+                "title" => "Team 2",
+                "color" => "primary",
+            ]
+        ];
+
+        return $statusInfo[$this->winner] ?? null;
     }
 
     public function Team1(){

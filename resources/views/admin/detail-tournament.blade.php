@@ -165,7 +165,6 @@
                           <th scope="col">Round</th>
                           <th scope="col">Team 1</th>
                           <th scope="col">Team 2</th>
-                          <th scope="col">Time</th>
                           <th scope="col">Winner</th>
                           <th scope="col">Status</th>
                           <th scope="col">#</th>
@@ -180,25 +179,29 @@
                                   <td>
                                     {{$m->round}}
                                   </td>
-                                  <td>
+                                  <td class="@if($m->status == 2) @if($m->winner == 1) text-success @else text-danger @endif @endif">
                                    [{{$m->Team1->abbreviation}}] - {{$m->Team1->name}}
                                   </td>
-                                  <td>
+                                  <td class="@if($m->status == 2) @if($m->winner == 2) text-success @else text-danger @endif @endif">
                                     [{{$m->Team2->abbreviation}}] - {{$m->Team2->name}}
                                   </td>
+                                  
                                   <td>
-                                    {{$m->Time->match_time ?? "?"}}
-                                  </td>
-                                  <td>
-                                    {{$m->winner}}
-                                  </td>
+                                    <span class="btn btn-outline-{{ $m->winner_info['color'] }}">{{ $m->winner_info['title'] }}</span>
+                                </td>
                                   <td>
                                     <span class="btn btn-outline-{{ $m->status_info['color'] }}">{{ $m->status_info['title'] }}</span>
                                 </td>
                                   <td>
                                     <a href="javscript:;" data-bs-toggle="modal" data-bs-target="#setMatchTime{{$m->id}}"><i class="fas fa-clock text-white fa-sm"></i></a>
+                                    <a href="javscript:;" data-bs-toggle="modal" data-bs-target="#setWinner{{$m->id}}"><i class="fas fa-trophy text-white fa-sm"></i></a>
                                     <a href="javscript:;" data-bs-toggle="tooltip" title="Remove Match"><i class="fas fa-trash text-white fa-sm"></i></a>
                                   </td>
+                              </tr>
+                              <tr>
+                                <td colspan="7" class="text-center">
+                                    <i class="fas fa-calendar me-2"></i> {{$m->Time->match_time ?? "?"}}
+                                </td>
                               </tr>
 
                               <div class="modal fade" tabindex="-1" id="setMatchTime{{$m->id}}">
@@ -269,6 +272,56 @@
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                       <button type="button" class="btn btn-primary" onclick="setMatchTime({{$tournament->id}}, {{$tournament->current_round}}, {{$m->id}})">Set Match Time</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="modal fade" tabindex="-1" id="setWinner{{$m->id}}">
+                                <div class="modal-dialog ">
+                                  <div class="modal-content bg-dark">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-white">
+                                        @if ($m->id == 1)
+                                        <span class="custom-number">
+                                            <span class="num">1</span>
+                                            <sup>ST</sup>
+                                          </span>
+                                        @elseif($m->id == 2)
+                                        <span class="custom-number">
+                                            <span class="num">2</span>
+                                            <sup>ND</sup>
+                                          </span>
+                                          @elseif ($m->id == 3)
+                                          <span class="custom-number">
+                                              <span class="num">3</span>
+                                              <sup>RD</sup>
+                                        </span>
+                                        @else
+                                        <span class="custom-number">
+                                            <span class="num">{{$m->id}}</span>
+                                            <sup>TH</sup>
+                                          </span>
+                                        @endif
+                                        Match Winner is
+                                      </h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="team1" class="form-label text-white">Team 1</label>
+                                            <select id="winner{{$m->id}}" class="form-control">
+                                                <option value="0">Choose Winner Team</option>
+                                                <option value="1">[{{$m->Team1->abbreviation}}] - {{$m->Team1->name}}</option>
+                                                <option value="2">[{{$m->Team2->abbreviation}}] - {{$m->Team2->name}}</option>
+                                            </select>
+                                          </div>
+                                    </div>
+
+                                    
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                      <button type="button" class="btn btn-primary" onclick="setWinner({{$m->id}})">Set Winner</button>
                                     </div>
                                   </div>
                                 </div>
@@ -357,6 +410,20 @@
 
 @section('script')
     <script>
+
+        function setWinner(match){
+            axios.post('/admin/tournament/setWinner', {
+                match:match,
+                winner: $("#winner"+match).val()
+            }).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if (res.data.status) {
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
+        }
 
         function setMatchTime(tournament, round, match){
             axios.post('/admin/tournament/setMatchTime', {
