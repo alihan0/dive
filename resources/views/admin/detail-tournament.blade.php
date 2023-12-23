@@ -182,11 +182,11 @@
             <div class="modal-body">
                 
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label text-white">Team 1</label>
-                    <select class="form-control" name="" id="">
+                    <label for="team1" class="form-label text-white">Team 1</label>
+                    <select class="form-control" id="team1">
                         <option value="0">Select Team</option>
                         @foreach ($participants as $item)
-                            <option value="">[{{$item->Team->abbreviation}}] - {{$item->Team->name}}</option>
+                            <option value="{{$item->Team->id}}">[{{$item->Team->abbreviation}}] - {{$item->Team->name}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -194,18 +194,18 @@
                     <span class=" px-5 py-2 my-4 text-white">--- VS ---</span>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label text-white">Team 2</label>
-                    <select class="form-control" name="" id="">
+                    <label for="team2" class="form-label text-white">Team 2</label>
+                    <select class="form-control" id="team2">
                         <option value="0">Select Team</option>
                         @foreach ($participants as $item)
-                            <option value="">[{{$item->Team->abbreviation}}] - {{$item->Team->name}}</option>
+                            <option value="{{$item->Team->id}}">[{{$item->Team->abbreviation}}] - {{$item->Team->name}}</option>
                         @endforeach
                     </select>
                   </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Save Match</button>
+              <button type="button" class="btn btn-primary" onclick="saveMatch({{$tournament->id}}, {{$tournament->current_round}})">Save Match</button>
             </div>
           </div>
         </div>
@@ -216,13 +216,20 @@
     <script>
 
         
-        var match_count = $("#match_count").val();
-        let input;
-
-        for (let i = 0; i < match_count; i++) {
-            input += i
-            $("#matchForm").html(input)
-            
+        function saveMatch(tournament, round){
+            axios.post('/admin/tournament/setMatch', {
+                tournament:tournament,
+                round:round,
+                team1: $("#team1").val(),
+                team2: $("#team2").val()
+            }).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if(res.data.status){
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
         }
 
         function setPublish(id,status){

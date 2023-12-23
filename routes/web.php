@@ -57,7 +57,6 @@ Route::controller(AppController::class)->prefix('app')->middleware('auth')->grou
     Route::get('/tournaments', 'tournaments');
     Route::get('/tournament/detail/{id}', 'tournament_detail');
     Route::post('/tournament/apply', 'apply_tournament');
-    Route::post('/get_participants', 'get_participants');
 });
 
 
@@ -96,6 +95,7 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::post('/tournament/setPublish', 'set_publish');
     Route::post('/tournament/setStatus', 'set_status');
     Route::post('/tournament/remove', 'remove');
+    Route::post('/tournament/setMatch', 'set_match');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);

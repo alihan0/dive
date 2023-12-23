@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\TournamentMatches;
 use App\Models\TournamentParticipant;
 use Illuminate\Http\Request;
 use Auth;
@@ -250,6 +251,55 @@ class AdminController extends Controller
         $t = Tournament::find($request->id);
         if($t->delete()){
             return response()->json(["type" => "success", "message" => "Tournament removed successfully.", "status" => true]);   
+        }
+    }
+
+
+    public function set_match(Request $request){
+        $tournament = $request->tournament;
+        $round = $request->round;
+        $team1 = $request->team1;
+        $team2 = $request->team2;
+
+        if($team1 == 0){
+            return response()->json(["type" => "warning", "message" => "Please, choose Team 1"]);
+        }
+
+        if($team2 == 0){
+            return response()->json(["type" => "warning", "message" => "Please, choose Team 2"]);
+        }
+
+        if($team1 == $team2){
+            return response()->json(["type" => "warning", "message" => "You have to choose different teams."]);
+        }
+
+        // Belirli turnuva ve tur için team1 veya team2 olarak belirtilen takımı içeren bir maç var mı kontrol et
+        $existingMatch = TournamentMatches::where('tournament', $tournament)
+        ->where('round', $round)
+        ->where(function ($query) use ($team1, $team2) {
+            $query->where('team1', $team1)
+                ->orWhere('team2', $team1)
+                ->orWhere('team1', $team2)
+                ->orWhere('team2', $team2);
+        })
+        ->first();
+
+        if($existingMatch){
+            return response()->json(["type" => "warning", "message" => "A match with these teams already exists for this round."]);
+        }
+
+        $match = new TournamentMatches;
+        $match->tournament = $tournament;
+        $match->round = $round;
+        $match->team1 = $team1;
+        $match->team2 = $team2;
+        $match->winner = 0;
+        $match->status = 1;
+
+        if($match->save()){
+            return response()->json(["type" => "success", "message" => "Macth is created", "status" => true]);
+        }else{
+            return response()->json(["type" => "warning", "message" => "System Error"]);
         }
     }
 }
