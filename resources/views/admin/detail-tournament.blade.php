@@ -94,7 +94,7 @@
 
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#nextRound">Next Round</button>
                     
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#setMatch">Complete Game</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#completeGame">Complete Game</button>
                 @endif
 
                 
@@ -497,11 +497,90 @@
         </div>
       </div>
 
+    
+
+
+
+      <div class="modal fade" id="completeGame" aria-hidden="true" aria-labelledby="completeGame" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h5 class="modal-title text-white">Complete Game
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @if ($tournament->current_round == $tournament->round)
+            <div class="modal-body">
+                
+                    
+                <h5 class="modal-title text-white mb-4">
+                    Are you sure?
+                </h5>
+
+                <div class="alert alert-warning" role="alert">
+                    Are you sure you want to complete the game? This action cannot be undone.
+                  </div>
+           
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#completeGameModal">Yes, do it</button>
+            </div>
+            @else
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    The tournament is still ongoing. Wait for the last round to complete the game...
+                  </div>
+            </div>
+            @endif
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="completeGameModal" aria-hidden="true" aria-labelledby="completeGameModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h5 class="modal-title text-white">
+                Complete Game
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="mb-3">
+                    <label for="team1" class="form-label text-white">Choose Winner Team</label>
+                    <select class="form-control" id="winnerTeam">
+                        <option value="0">Select Team</option>
+                        @foreach ($participants as $item)
+                            <option value="{{$item->Team->id}}">[{{$item->Team->abbreviation}}] - {{$item->Team->name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="completeGame({{$tournament->id}})">Save Match</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
       
 @endsection
 
 @section('script')
     <script>
+
+        function completeGame(tournament){
+            axios.post('/admin/tournament/completeGame', {tournament:tournament, winner: $("#winnerTeam").val()}).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if (res.data.status) {
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
+        }
 
         function nextRound(tournament){
             axios.post('/admin/tournament/nextRound', {tournament:tournament}).then((res) => {

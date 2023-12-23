@@ -419,4 +419,26 @@ class AdminController extends Controller
             return response()->json(["type" => "warning", "message" => "System Error"]);
         }
     }
+
+    public function complete_game(Request $request){
+        $t = Tournament::find($request->tournament);
+
+        $t->status = 3;
+        $t->winner = $request->winner;
+
+        
+
+        if($t->save()){
+
+            $old = TournamentParticipant::where('tournament',$t->id)->get();
+
+            foreach ($old as $o) {
+                $o->status = 2;
+                $o->save();
+            }
+            return response()->json(["type" => "success", "message" => "Game is completed", "status" => true]); 
+        }else{
+            return response()->json(["type" => "warning", "message" => "System Error"]);
+        }
+    }
 }
