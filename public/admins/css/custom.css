@@ -1,1 +1,275 @@
-/* Write your custom CSS here */
+tr.round-1 {
+    border-left: 10px solid rgb(235, 52, 52) !important;
+    border-right: 3px solid rgb(235, 52, 52) !important;
+    background: rgba(235, 52, 52, 0.2);
+}
+
+tr.round-2 {
+    border-left: 10px solid rgb(235, 147, 52) !important;
+    border-right: 3px solid rgb(235, 147, 52) !important;
+    background: rgba(235, 147, 52, 0.2);
+}
+
+tr.round-3 {
+    border-left: 10px solid rgb(235, 220, 52) !important;
+    border-right: 3px solid rgb(235, 220, 52) !important;
+    background: rgba(235, 220, 52, 0.2);
+}
+
+tr.round-4 {
+    border-left: 10px solid rgb(177, 235, 52) !important;
+    border-right: 3px solid rgb(177, 235, 52) !important;
+    background: rgba(177, 235, 52, 0.2);
+}
+
+tr.round-5 {
+    border-left: 10px solid rgb(104, 235, 52) !important;
+    border-right: 3px solid rgb(104, 235, 52) !important;
+    background: rgba(104, 235, 52, 0.2);
+}
+
+tr.round-6 {
+    border-left: 10px solid rgb(52, 235, 125) !important;
+    border-right: 3px solid rgb(52, 235, 125) !important;
+    background: rgba(52, 235, 125, 0.2);
+}
+
+tr.round-7 {
+    border-left: 10px solid rgb(52, 235, 189) !important;
+    border-right: 3px solid rgb(52, 235, 189) !important;
+    background: rgba(52, 235, 189, 0.2);
+}
+
+tr.round-8 {
+    border-left: 10px solid rgb(52, 235, 229) !important;
+    border-right: 3px solid rgb(52, 235, 229) !important;
+    background: rgba(52, 235, 229, 0.2);
+}
+
+tr.round-9 {
+    border-left: 10px solid rgb(52, 177, 235) !important;
+    border-right: 3px solid rgb(52, 177, 235) !important;
+    background: rgba(52, 177, 235, 0.2);
+}
+
+tr.round-10 {
+    border-left: 10px solid rgb(52, 177, 235) !important;
+    border-right: 3px solid rgb(52, 113, 235) !important;
+    background: rgba(52, 113, 235, 0.2);
+}
+
+tr.round-11 {
+    border-left: 10px solid rgb(52, 113, 235) !important;
+    border-right: 3px solid rgb(52, 52, 235) !important;
+    background: rgba(52, 52, 235, 0.2);
+}
+
+tr.round-12 {
+    border-left: 10px solid rgb(113, 52, 235) !important;
+    border-right: 3px solid rgb(147, 52, 235) !important;
+    background: rgba(147, 52, 235, 0.2);
+}
+
+tr.round-13 {
+    border-left: 10px solid rgb(147, 52, 235) !important;
+    border-right: 3px solid rgb(177, 52, 235) !important;
+    background: rgba(177, 52, 235, 0.2);
+}
+
+tr.round-14 {
+    border-left: 10px solid rgb(177, 52, 235) !important;
+    border-right: 3px solid rgb(220, 52, 235) !important;
+    background: rgba(220, 52, 235, 0.2);
+}
+
+tr.round-15 {
+    border-left: 10px solid rgb(220, 52, 235) !important;
+    border-right: 3px solid rgb(235, 52, 189) !important;
+    background: rgba(235, 52, 189, 0.2);
+}
+
+tr.round-16 {
+    border-left: 10px solid rgb(235, 52, 189) !important;
+    border-right: 3px solid rgb(235, 52, 104) !important;
+    background: rgba(235, 52, 104, 0.2);
+}
+
+tr.round-17 {
+    border-left: 10px solid rgb(235, 52, 104) !important;
+    border-right: 3px solid rgb(235, 104, 52) !important;
+    background: rgba(235, 104, 52, 0.2);
+}
+
+tr.round-18 {
+    border-left: 10px solid rgb(235, 104, 52) !important;
+    border-right: 3px solid rgb(235, 189, 52) !important;
+    background: rgba(235, 189, 52, 0.2);
+}
+
+tr.round-19 {
+    border-left: 10px solid rgb(235, 189, 52) !important;
+    border-right: 3px solid rgb(235, 220, 52) !important;
+    background: rgba(235, 220, 52, 0.2);
+}
+
+tr.round-20 {
+    border-left: 10px solid rgb(235, 220, 52) !important;
+    border-right: 3px solid rgb(220, 235, 52) !important;
+    background: rgba(220, 235, 52, 0.2);
+}
+
+tr.round-21 {
+    border-left: 10px solid rgb(220, 235, 52) !important;
+    border-right: 3px solid rgb(189, 235, 52) !important;
+    background: rgba(189, 235, 52, 0.2);
+}
+
+tr.round-22 {
+    border-left: 10px solid rgb(189, 235, 52) !important;
+    border-right: 3px solid rgb(147, 235, 52) !important;
+    background: rgba(147, 235, 52, 0.2);
+}
+
+tr.round-23 {
+    border-left: 10px solid rgb(147, 235, 52) !important;
+    border-right: 3px solid rgb(113, 235, 52) !important;
+    background: rgba(113, 235, 52, 0.2);
+}
+
+tr.round-24 {
+    border-left: 10px solid rgb(113, 235, 52) !important;
+    border-right: 3px solid rgb(52, 235, 52) !important;
+    background: rgba(52, 235, 52, 0.2);
+}
+
+tr.round-25 {
+    border-left: 10px solid rgb(52, 235, 52) !important;
+    border-right: 3px solid rgb(52, 235, 125) !important;
+    background: rgba(52, 235, 125, 0.2);
+}
+
+tr.round-26 {
+    border-left: 10px solid rgb(52, 235, 125) !important;
+    border-right: 3px solid rgb(52, 235, 189) !important;
+    background: rgba(52, 235, 189, 0.2);
+}
+
+tr.round-27 {
+    border-left: 10px solid rgb(52, 235, 189) !important;
+    border-right: 3px solid rgb(52, 235, 229) !important;
+    background: rgba(52, 235, 229, 0.2);
+}
+
+tr.round-28 {
+    border-left: 10px solid rgb(52, 235, 229) !important;
+    border-right: 3px solid rgb(52, 177, 235) !important;
+    background: rgba(52, 177, 235, 0.2);
+}
+
+tr.round-29 {
+    border-left: 10px solid rgb(52, 177, 235) !important;
+    border-right: 3px solid rgb(52, 177, 235) !important;
+    background: rgba(52, 177, 235, 0.2);
+}
+
+tr.round-30 {
+    border-left: 10px solid rgb(52, 177, 235) !important;
+    border-right: 3px solid rgb(52, 113, 235) !important;
+    background: rgba(52, 113, 235, 0.2);
+}
+
+tr.round-31 {
+    border-left: 10px solid rgb(52, 113, 235) !important;
+    border-right: 3px solid rgb(52, 52, 235) !important;
+    background: rgba(52, 52, 235, 0.2);
+}
+
+tr.round-32 {
+    border-left: 10px solid rgb(113, 52, 235) !important;
+    border-right: 3px solid rgb(147, 52, 235) !important;
+    background: rgba(147, 52, 235, 0.2);
+}
+
+tr.round-33 {
+    border-left: 10px solid rgb(147, 52, 235) !important;
+    border-right: 3px solid rgb(177, 52, 235) !important;
+    background: rgba(177, 52, 235, 0.2);
+}
+
+tr.round-34 {
+    border-left: 10px solid rgb(177, 52, 235) !important;
+    border-right: 3px solid rgb(220, 52, 235) !important;
+    background: rgba(220, 52, 235, 0.2);
+}
+
+tr.round-35 {
+    border-left: 10px solid rgb(220, 52, 235) !important;
+    border-right: 3px solid rgb(235, 52, 189) !important;
+    background: rgba(235, 52, 189, 0.2);
+}
+
+tr.round-36 {
+    border-left: 10px solid rgb(235, 52, 189) !important;
+    border-right: 3px solid rgb(235, 52, 104) !important;
+    background: rgba(235, 52, 104, 0.2);
+}
+
+tr.round-37 {
+    border-left: 10px solid rgb(235, 52, 104) !important;
+    border-right: 3px solid rgb(235, 104, 52) !important;
+    background: rgba(235, 104, 52, 0.2);
+}
+
+tr.round-38 {
+    border-left: 10px solid rgb(235, 104, 52) !important;
+    border-right: 3px solid rgb(235, 189, 52) !important;
+    background: rgba(235, 189, 52, 0.2);
+}
+
+tr.round-39 {
+    border-left: 10px solid rgb(235, 189, 52) !important;
+    border-right: 3px solid rgb(235, 220, 52) !important;
+    background: rgba(235, 220, 52, 0.2);
+}
+
+tr.round-40 {
+    border-left: 10px solid rgb(235, 220, 52) !important;
+    border-right: 3px solid rgb(220, 235, 52) !important;
+    background: rgba(220, 235, 52, 0.2);
+}
+
+tr.round-41 {
+    border-left: 10px solid rgb(220, 235, 52) !important;
+    border-right: 3px solid rgb(189, 235, 52) !important;
+    background: rgba(189, 235, 52, 0.2);
+}
+
+tr.round-42 {
+    border-left: 10px solid rgb(189, 235, 52) !important;
+    border-right: 3px solid rgb(147, 235, 52) !important;
+    background: rgba(147, 235, 52, 0.2);
+}
+
+tr.round-43 {
+    border-left: 10px solid rgb(147, 235, 52) !important;
+    border-right: 3px solid rgb(113, 235, 52) !important;
+    background: rgba(113, 235, 52, 0.2);
+}
+
+tr.round-44 {
+    border-left: 10px solid rgb(113, 235, 52) !important;
+    border-right: 3px solid rgb(52, 235, 52) !important;
+    background: rgba(52, 235, 52, 0.2);
+}
+
+tr.round-45 {
+    border-left: 10px solid rgb(52, 235, 52) !important;
+    border-right: 3px solid rgb(52, 235, 125) !important;
+    background: rgba(52, 235, 125, 0.2);
+}
+
+tr.round-46 {
+    border-left: 10px solid rgb(52, 235, 125) !important;
+    border-right: 3px solid rgb(52, 235, 189) !important;
+    background: rgba(52, 235, 189, 0.2);
+}

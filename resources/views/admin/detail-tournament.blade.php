@@ -91,6 +91,10 @@
             
                 @if ($tournament->status == 2)
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#setMatch">Set Match</button>
+
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#nextRound">Next Round</button>
+                    
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#setMatch">Complete Game</button>
                 @endif
 
                 
@@ -172,7 +176,7 @@
                       </thead>
                       <tbody>
                           @foreach ($matches as $m)
-                              <tr>
+                              <tr class="round-{{$m->round}}">
                                   <td>
                                       {{$m->id}}
                                   </td>
@@ -198,7 +202,7 @@
                                     <a href="javscript:;" onclick="removeMatch({{$m->id}})" data-bs-toggle="tooltip" title="Remove Match"><i class="fas fa-trash text-white fa-sm"></i></a>
                                   </td>
                               </tr>
-                              <tr>
+                              <tr class="round-{{$m->round}}">
                                 <td colspan="4" class="text-center">
                                     <i class="fas fa-calendar me-2"></i> {{$m->Time->match_time ?? "?"}}
                                 </td>
@@ -452,11 +456,63 @@
         </div>
       </div>
 
+
+      <div class="modal fade" tabindex="-1" id="nextRound">
+        <div class="modal-dialog ">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h5 class="modal-title text-white">Next
+                Round
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @if ($tournament->current_round < $tournament->round)
+            <div class="modal-body">
+                
+                    
+                <h5 class="modal-title text-white mb-4">
+                    Are you sure?
+                </h5>
+
+                <div class="alert alert-warning" role="alert">
+                    The tournament will be advanced to the next round. This action cannot be undone. Please only perform this action if all matches have been completed.
+                  </div>
+                  <span class="badge bg-primary">Current Round: <b>{{$tournament->current_round}}</b></span>
+                  <span class="badge bg-primary">Next Round: <b>{{$tournament->current_round + 1 < $tournament->round ? $tournament->current_round + 1 : $tournament->round}}</b></span>
+
+                  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="nextRound({{$tournament->id}})">Yes, do it</button>
+            </div>
+            @else
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    The last round of the tournament is being played. You can't upgrade this tournament any higher. If this round has been played, please complete the tournament.
+                  </div>
+            </div>
+            @endif
+          </div>
+        </div>
+      </div>
+
       
 @endsection
 
 @section('script')
     <script>
+
+        function nextRound(tournament){
+            axios.post('/admin/tournament/nextRound', {tournament:tournament}).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if (res.data.status) {
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
+        }
 
         function removeMatch(match){
             axios.post('/admin/tournament/removeMatch', {
@@ -583,6 +639,7 @@
     vertical-align: text-top; /* Değişiklik burada */
     border-radius: 0.25rem;
 }
+
 
     </style>
 @endsection

@@ -99,6 +99,7 @@ Route::controller(AdminController::class)->prefix('admin')->middleware('admin')-
     Route::post('/tournament/setMatchTime', 'set_match_time');
     Route::post('/tournament/setWinner', 'set_winner');
     Route::post('/tournament/removeMatch', 'remove_match');
+    Route::post('/tournament/nextRound', 'next_round');
 });
 
 Route::get('/admin/login', [AdminController::class,'login']);

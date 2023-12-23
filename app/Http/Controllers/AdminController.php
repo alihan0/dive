@@ -377,4 +377,46 @@ class AdminController extends Controller
             return response()->json(["type" => "warning", "message" => "Match is already completed"]);
         }
     }
+
+    public function next_round(Request $request){
+        $t = Tournament::find($request->tournament);
+        $r = $t->current_round;
+        $t->current_round = $t->current_round + 1;
+
+
+        if($t->save()){
+
+            $old = TournamentParticipant::where('tournament',$t->id)->where('round', $r)->get();
+
+            foreach ($old as $o) {
+                $o->status = 2;
+                $o->save();
+            }
+            $matches = TournamentMatches::where('tournament', $t->id)
+            ->where('round', $r)
+            ->whereIn('winner', [1, 2])
+            ->get();
+
+            foreach ($matches as $match) {
+                // Winner 1 ise team1, winner 2 ise team2
+                $teamId = ($match->winner == 1) ? $match->team1 : $match->team2;
+    
+                // Yeni bir TournamentParticipant oluştur
+                $newParticipant = new TournamentParticipant([
+                    'tournament' => $t->id,
+                    'round' => $t->current_round,
+                    'team' => $teamId,
+                    'status' => 1
+                    // Diğer gerekli sütunları buraya ekleyin
+                ]);
+    
+                // Yeni katılımcıyı kaydet
+                $newParticipant->save();
+            }
+
+            return response()->json(["type" => "success", "message" => "Round upgraded", "status" => true]); 
+        }else{
+            return response()->json(["type" => "warning", "message" => "System Error"]);
+        }
+    }
 }
