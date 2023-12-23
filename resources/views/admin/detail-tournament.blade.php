@@ -99,7 +99,7 @@
       </div>
       </div>
       <div class="col-md-12 col-lg-9">
-        <div class="card card-bg">
+        <div class="card card-bg mb-4">
           <div class="card-body">
               <div class="post">
                   <div class="post-header">
@@ -145,7 +145,148 @@
               </div>
           </div>
       </div>
+
+      <div class="card card-bg">
+        <div class="card-body">
+            <div class="post">
+                <div class="post-header">
+                    
+                    <div class="post-info">
+                        <span class="post-author">Matches</span><br>
+                    </div>
+                    
+                </div>
+                <div class="post-body">
+                    
+                  <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Round</th>
+                          <th scope="col">Team 1</th>
+                          <th scope="col">Team 2</th>
+                          <th scope="col">Time</th>
+                          <th scope="col">Winner</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">#</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($matches as $m)
+                              <tr>
+                                  <td>
+                                      {{$m->id}}
+                                  </td>
+                                  <td>
+                                    {{$m->round}}
+                                  </td>
+                                  <td>
+                                   [{{$m->Team1->abbreviation}}] - {{$m->Team1->name}}
+                                  </td>
+                                  <td>
+                                    [{{$m->Team2->abbreviation}}] - {{$m->Team2->name}}
+                                  </td>
+                                  <td>
+                                    {{$m->Time->match_time ?? "?"}}
+                                  </td>
+                                  <td>
+                                    {{$m->winner}}
+                                  </td>
+                                  <td>
+                                    <span class="btn btn-outline-{{ $m->status_info['color'] }}">{{ $m->status_info['title'] }}</span>
+                                </td>
+                                  <td>
+                                    <a href="javscript:;" data-bs-toggle="modal" data-bs-target="#setMatchTime{{$m->id}}"><i class="fas fa-clock text-white fa-sm"></i></a>
+                                    <a href="javscript:;" data-bs-toggle="tooltip" title="Remove Match"><i class="fas fa-trash text-white fa-sm"></i></a>
+                                  </td>
+                              </tr>
+
+                              <div class="modal fade" tabindex="-1" id="setMatchTime{{$m->id}}">
+                                <div class="modal-dialog ">
+                                  <div class="modal-content bg-dark">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-white">
+                                        @if ($m->id == 1)
+                                        <span class="custom-number">
+                                            <span class="num">1</span>
+                                            <sup>ST</sup>
+                                          </span>
+                                        @elseif($m->id == 2)
+                                        <span class="custom-number">
+                                            <span class="num">2</span>
+                                            <sup>ND</sup>
+                                          </span>
+                                          @elseif ($m->id == 3)
+                                          <span class="custom-number">
+                                              <span class="num">3</span>
+                                              <sup>RD</sup>
+                                        </span>
+                                        @else
+                                        <span class="custom-number">
+                                            <span class="num">{{$m->id}}</span>
+                                            <sup>TH</sup>
+                                          </span>
+                                        @endif
+                                        Match
+                                      </h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <div class="mb-3">
+                                            <label for="team1" class="form-label text-white">Team 1</label>
+                                            <input type="text" disabled class="form-control" value="{{$m->Team1->abbreviation}} - {{$m->Team1->name}}">
+                                          </div>
+                                          <div class="text-center">
+                                            <span class=" px-5 py-2 my-4 text-white">--- VS ---</span>
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="team2" class="form-label text-white">Team 2</label>
+                                            <input type="text" disabled class="form-control" value="{{$m->Team2->abbreviation}} - {{$m->Team2->name}}">
+                                          </div>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        
+                                        
+                                          
+                                          <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="team1" class="form-label text-white">Match Date</label>
+                                                    <input type="date" class="form-control" id="date{{$m->id}}">
+                                                  </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="team1" class="form-label text-white">Match Time</label>
+                                                    <input type="time" class="form-control" id="time{{$m->id}}">
+                                                  </div>
+                                            </div>
+                                          </div>
+                                          
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                      <button type="button" class="btn btn-primary" onclick="setMatchTime({{$tournament->id}}, {{$tournament->current_round}}, {{$m->id}})">Set Match Time</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          @endforeach
+                      </tbody>
+                    </table>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
       </div>
+
+      
+
+      
      
       
 
@@ -210,11 +351,29 @@
           </div>
         </div>
       </div>
+
+      
 @endsection
 
 @section('script')
     <script>
 
+        function setMatchTime(tournament, round, match){
+            axios.post('/admin/tournament/setMatchTime', {
+                tournament:tournament,
+                round:round,
+                match:match,
+                date: $("#date"+match).val(),
+                time: $("#time"+match).val()
+            }).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if (res.data.status) {
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
+        }
         
         function saveMatch(tournament, round){
             axios.post('/admin/tournament/setMatch', {

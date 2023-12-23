@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\TournamentMatches;
+use App\Models\TournamentMatchTimes;
 use App\Models\TournamentParticipant;
 use Illuminate\Http\Request;
 use Auth;
@@ -224,7 +225,7 @@ class AdminController extends Controller
 
     public function detail_tournament($id){
         $tournament = Tournament::find($id);
-        return view('admin.detail-tournament', ['tournament' => $tournament, 'participants' => TournamentParticipant::where('tournament',$id)->where('status',1)->get()]);
+        return view('admin.detail-tournament', ['tournament' => $tournament, 'participants' => TournamentParticipant::where('tournament',$id)->where('status',1)->get(), 'matches' => TournamentMatches::where('tournament',$id)->get()]);
     }
 
     public function set_publish(Request $request){
@@ -300,6 +301,49 @@ class AdminController extends Controller
             return response()->json(["type" => "success", "message" => "Macth is created", "status" => true]);
         }else{
             return response()->json(["type" => "warning", "message" => "System Error"]);
+        }
+    }
+
+    public function set_match_time(Request $request){
+        $tournament = $request->tournament;
+        $round = $request->round;
+        $match = $request->match;
+        $date = $request->date;
+        $time = $request->time;
+        $dateTime = $date.' '.$time;
+
+        if(empty($date) || empty($request->time)){
+            return response()->json(["type" => "warning", "message" => "Set a date and time."]);
+        }
+
+        $matchTime = TournamentMatchTimes::where('tournament',$tournament)->where('round',$round)->where('match_id', $match)->first();
+
+        if($matchTime){
+            $set = $matchTime;
+            $set->tournament = $tournament;
+            $set->round = $round;
+            $set->match_id = $match;
+            $set->match_time = $dateTime;
+
+            if($set->save()){
+                return response()->json(["type" => "success", "message" => "Macth Time is updated", "status" => true]); 
+            }else{
+                return response()->json(["type" => "warning", "message" => "System Error"]);
+            }
+
+        }else{
+            $set = new TournamentMatchTimes;
+            $set->tournament = $tournament;
+            $set->round = $round;
+            $set->match_id = $match;
+            $set->match_time = $dateTime;
+
+            if($set->save()){
+                return response()->json(["type" => "success", "message" => "Macth Time is created", "status" => true]); 
+            }else{
+                return response()->json(["type" => "warning", "message" => "System Error"]);
+            }
+
         }
     }
 }
