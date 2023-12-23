@@ -199,10 +199,57 @@
                                   </td>
                               </tr>
                               <tr>
-                                <td colspan="7" class="text-center">
+                                <td colspan="4" class="text-center">
                                     <i class="fas fa-calendar me-2"></i> {{$m->Time->match_time ?? "?"}}
                                 </td>
+                                <td colspan="5" class="text-end">
+                                    <a href="javascript:;" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#UserResultModal{{$m->id}}">Results</a>
+                                </td>
                               </tr>
+
+                              <div class="modal fade" tabindex="-1" id="UserResultModal{{$m->id}}">
+                                <div class="modal-dialog ">
+                                  <div class="modal-content bg-dark">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-white">
+                                        @if ($m->id == 1)
+                                        <span class="custom-number">
+                                            <span class="num">1</span>
+                                            <sup>ST</sup>
+                                          </span>
+                                        @elseif($m->id == 2)
+                                        <span class="custom-number">
+                                            <span class="num">2</span>
+                                            <sup>ND</sup>
+                                          </span>
+                                          @elseif ($m->id == 3)
+                                          <span class="custom-number">
+                                              <span class="num">3</span>
+                                              <sup>RD</sup>
+                                        </span>
+                                        @else
+                                        <span class="custom-number">
+                                            <span class="num">{{$m->id}}</span>
+                                            <sup>TH</sup>
+                                          </span>
+                                        @endif
+                                        Match User Results
+                                      </h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                          @foreach ($m->UserResults as $item)
+                                          <div class="mb-3">
+                                            <label for="team2" class="form-label text-white">{{$item->team == 1 ? 'Team 1' : 'Team 2'}}'s Winner</label>
+                                            <input type="text" disabled class="form-control mb-2" value="Team {{$item->result}}">
+                                            <img src="{{$item->image}}" class="img-thumbnail border-dark" alt="">
+                                          </div>
+                                          <hr>
+                                          @endforeach
+                                        </div>
+                                  </div>
+                                </div>
+                              </div>
 
                               <div class="modal fade" tabindex="-1" id="setMatchTime{{$m->id}}">
                                 <div class="modal-dialog ">
