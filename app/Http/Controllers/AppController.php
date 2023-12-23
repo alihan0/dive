@@ -389,7 +389,7 @@ class AppController extends Controller
     }
 
     public function tournament_detail($id){
-        return view('app.tournament_detail', ['tournament' => Tournament::find($id), 'participants' => TournamentParticipant::where('status',1)->get()]);
+        return view('app.tournament_detail', ['tournament' => Tournament::find($id), 'participants' => TournamentParticipant::where('status',1)->get(), 'participans_array' => TournamentParticipant::where('status',1)->get()->toArray()]);
     }
 
     public function apply_tournament(Request $request){
@@ -430,5 +430,9 @@ class AppController extends Controller
 
         
 
+    }
+
+    public function get_participants(Request $request){
+        return TournamentParticipant::where('tournament', $request->tournament)->where('round', $request->round)->where('status',1)->get();
     }
 }

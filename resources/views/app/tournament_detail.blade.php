@@ -89,8 +89,27 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="d-flex align-items-center mb-3">Bracket</h5>
-        
-                                <div id="minimal" class="demo"></div>
+                                
+                                  
+
+
+
+
+
+
+                                <div id="bracket"></div>
+
+
+
+
+
+
+
+
+
+
+
+
                                 
                             </div>
                         </div>
@@ -119,5 +138,67 @@
         });
     }
 
+    async function veriAl() {
+    
+        // axios.post işlemi tamamlandığında response değerini teams değişkenine ata
+        var teamsResponse = await axios.post('/app/get_participants', { tournament: 1, round: 1 });
+        
+        // teamsResponse verisini teams değişkenine ata
+         return teamsResponse.data;
+
+}
+    
+    var a = veriAl()
+    var max_round = 3;
+    var round = 0;
+    var matches = [];
+    
+    console.log(a)
+
+
+function ekipleriEslendir(ekipListesi) {
+    let yeniEslentiler = [];
+    
+    // Eşleşmeleri oluştur
+    for (let i = 0; i < ekipListesi.length; i += 2) {
+        const ekip1 = ekipListesi[i];
+        const ekip2 = ekipListesi[i + 1];
+
+        const mac = {
+            takim1: ekip1,
+            takim2: ekip2
+        };
+
+        yeniEslentiler.push(mac);
+    }
+
+    return yeniEslentiler;
+}
+
+// İlk turdaki eşleşmeleri oluştur
+matches[round] = ekipleriEslendir(teams);
+
+// Diğer turlardaki eşleşmeleri oluştur
+
+
+console.log(matches);
+
+$("#bracket").append('<ul>')
+
+    matches[0].forEach(element => {
+        $("#bracket").append('<li><span>'+element["takim1"]+'</span><hr><span>'+element["takim2"]+'</span></li>')
+
+    });
+$("#bracket").append('</ul>')
+   
+
+
 </script>
+@endsection
+
+@section('style')
+    <style>
+
+        
+    </style>
 @endsection

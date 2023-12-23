@@ -57,6 +57,7 @@ Route::controller(AppController::class)->prefix('app')->middleware('auth')->grou
     Route::get('/tournaments', 'tournaments');
     Route::get('/tournament/detail/{id}', 'tournament_detail');
     Route::post('/tournament/apply', 'apply_tournament');
+    Route::post('/get_participants', 'get_participants');
 });
 
 
