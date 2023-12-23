@@ -73,4 +73,8 @@ class Tournament extends Model
     return $publishInfo[$this->is_published] ?? null;
 }
 
+
+    public function Winner(){
+        return $this->hasOne(Team::class, 'id', 'winner');
+    }
 }

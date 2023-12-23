@@ -9,8 +9,6 @@
                 <div class="card-body border-bottom align-items-center self-center d-flex justify-content-between">
                     <h4 class="card-title ">Tournaments Details</h4>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        
-                        <a href="/admin/tournament/applications" class="btn btn-outline-danger">Applications</a>
                         <a href="/admin/tournament/active" class="btn btn-outline-danger">Active</a>
                         <a href="/admin/tournament/pending" class="btn btn-outline-danger">Pending</a>
                         <a href="/admin/tournament/all" class="btn btn-outline-danger active">All</a>
@@ -26,9 +24,16 @@
 
     <div class="row">
         <div class="col-xl-12">
-            <div class="profile-cover" style="background: url({{$tournament->cover}})"></div>
+            <div class="profile-cover" style="background: url({{$tournament->cover}})">
+                @if ($tournament->status == 3)
+                <div class="winner"><i class="fas fa-trophy fa-lg"></i> [{{$tournament->Winner->abbreviation}}] - {{$tournament->Winner->name}}</div>
+                @endif
+            </div>
+            
             <div class="profile-header">
                 
+                
+
                 <div class="profile-name">
                     <h3>{{$tournament->title}}</h3>
                 </div>
@@ -719,6 +724,28 @@
     border-radius: 0.25rem;
 }
 
+.winner{
+    position: absolute;
+    border-top:10px solid #000;
+    border-bottom:10px solid #000;
+    padding: 40px 20px;
+    top:0;
+    margin-top:7%;
+    background: rgba(00,00,00,0.5);
+    width: 100%;
+    text-align: center;
+    color:#fff;
+    font-size:33px;
+    font-weight: bold;
+    z-index: 9999;display: flex;
+      flex-direction: row;
+      justify-content: center;
+}
+
+.winner i{
+    font-size:72px;
+    margin-right: 20px;
+}
 
     </style>
 @endsection

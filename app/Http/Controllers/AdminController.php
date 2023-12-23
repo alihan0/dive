@@ -225,7 +225,14 @@ class AdminController extends Controller
 
     public function detail_tournament($id){
         $tournament = Tournament::find($id);
-        return view('admin.detail-tournament', ['tournament' => $tournament, 'participants' => TournamentParticipant::where('tournament',$id)->where('status',1)->get(), 'matches' => TournamentMatches::where('tournament',$id)->get()]);
+        if($tournament->status != 3){
+            $participants = TournamentParticipant::where('tournament',$id)->where('status',1)->get();
+        }else{
+            $participants = TournamentParticipant::where('tournament',$id)->where('round',1)->get();
+        }
+
+
+        return view('admin.detail-tournament', ['tournament' => $tournament, 'participants' => $participants, 'matches' => TournamentMatches::where('tournament',$id)->get()]);
     }
 
     public function set_publish(Request $request){
