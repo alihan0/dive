@@ -365,4 +365,16 @@ class AdminController extends Controller
             return response()->json(["type" => "warning", "message" => "Match not found!"]);
         }
     }
+
+    public function remove_match(Request $request){
+        $match = TournamentMatches::find($request->match);
+
+        if($match->status == 1){
+            if($match->delete()){
+                return response()->json(["type" => "success", "message" => "Match is removed","status" => true]);
+            }
+        }else{
+            return response()->json(["type" => "warning", "message" => "Match is already completed"]);
+        }
+    }
 }

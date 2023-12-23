@@ -195,7 +195,7 @@
                                   <td>
                                     <a href="javscript:;" data-bs-toggle="modal" data-bs-target="#setMatchTime{{$m->id}}"><i class="fas fa-clock text-white fa-sm"></i></a>
                                     <a href="javscript:;" data-bs-toggle="modal" data-bs-target="#setWinner{{$m->id}}"><i class="fas fa-trophy text-white fa-sm"></i></a>
-                                    <a href="javscript:;" data-bs-toggle="tooltip" title="Remove Match"><i class="fas fa-trash text-white fa-sm"></i></a>
+                                    <a href="javscript:;" onclick="removeMatch({{$m->id}})" data-bs-toggle="tooltip" title="Remove Match"><i class="fas fa-trash text-white fa-sm"></i></a>
                                   </td>
                               </tr>
                               <tr>
@@ -457,6 +457,19 @@
 
 @section('script')
     <script>
+
+        function removeMatch(match){
+            axios.post('/admin/tournament/removeMatch', {
+                match:match
+            }).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if (res.data.status) {
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
+        }
 
         function setWinner(match){
             axios.post('/admin/tournament/setWinner', {
