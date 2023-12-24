@@ -437,4 +437,8 @@ class AppController extends Controller
 
         return view('app.matches', ['matches' => $matches]);
     }
+
+    public function match($id){
+        return view('app.match', ['match' => TournamentMatches::find($id)]);
+    }
 }

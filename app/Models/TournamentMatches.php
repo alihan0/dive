@@ -66,4 +66,11 @@ class TournamentMatches extends Model
     public function Tournament(){
         return $this->belongsTo(Tournament::class,'tournament', 'id');
     }
+
+    public function Team1Members(){
+        return $this->hasMany(TeamMember::class, 'team', 'team1');
+    }
+    public function Team2Members(){
+        return $this->hasMany(TeamMember::class, 'team', 'team2');
+    }
 }
