@@ -165,6 +165,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="card-title text-dark" style="font-size:14px">Match Results</h4>
+                                <hr style="border:1px solid #222">
+                                <ul class="list-group">
+                                    @foreach ($match->Results->where('team',$match->team1) as $item)
+                                    <li class="list-group-item text-dark bg-white mb-3" style="border:1px solid #222">
+                                        <span class="fw-bold">Winning Team: Team {{$item->result}}</span>
+                                        <hr style="border:1px solid #222">
+                                        <img src="{{$item->image}}" class="img-fluid" alt="">
+                                    </li>
+                                    @endforeach
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="card-title text-dark" style="font-size:14px">Match Results</h4>
+                                <hr style="border:1px solid #222">
+                                <ul class="list-group">
+                                    @foreach ($match->Results->where('team',$match->team2) as $item)
+                                    <li class="list-group-item text-dark bg-white mb-3" style="border:1px solid #222">
+                                        <span class="fw-bold">Winning Team: Team {{$item->result}}</span>
+                                        <hr style="border:1px solid #222">
+                                        <img src="{{$item->image}}" class="img-fluid" alt="">
+                                    </li>
+                                    @endforeach
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

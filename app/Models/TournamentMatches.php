@@ -73,4 +73,8 @@ class TournamentMatches extends Model
     public function Team2Members(){
         return $this->hasMany(TeamMember::class, 'team', 'team2');
     }
+
+    public function Results(){
+        return $this->hasMany(TournamentUserResult::class, 'match_id', 'id');
+    }
 }
