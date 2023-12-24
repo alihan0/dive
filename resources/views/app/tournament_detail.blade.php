@@ -49,6 +49,16 @@
                 </div>
             </div>
             <div class="col-lg-8">
+                @if ($tournament->status == 3)
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success border-success text-white d-flex justify-content-center align-items-center" role="alert">
+                                <i class="fas fa-trophy fs-1 me-3"></i>
+                                <span class="fw-bold fs-4">[{{$tournament->Winner->abbreviation}}] - {{$tournament->Winner->name}}</span>
+                              </div>
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
