@@ -427,9 +427,14 @@ class AppController extends Controller
         }else{
             return response()->json(["type" => "warning", "message" => "Something went wrong..."]);
         }
-        
+    }
 
-        
+    public function matches(Request $request){
 
+        $user = Auth::user();
+        $team = $user->team;
+        $matches = TournamentMatches::where('team1',$team->team)->orWhere('team2',$team->team)->orderBy('id','desc')->get();
+
+        return view('app.matches', ['matches' => $matches]);
     }
 }

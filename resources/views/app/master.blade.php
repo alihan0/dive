@@ -47,7 +47,17 @@
 					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
 					
 					<div class="top-menu ms-auto">
-						
+						@if (Auth::user()->team)
+						<div class="user-box dropdown">
+							<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="{{Auth::user()->Team->Team->logo}}" class="user-img" alt="user avatar">
+								<div class="user-info ps-3">
+									<p class="user-name mb-0">[{{Auth::user()->Team->Team->abbreviation}}] - {{Auth::user()->Team->Team->name}}</p>
+								</div>
+							</a>
+							
+						</div>
+						@endif
 					</div>
 					<div class="user-box dropdown">
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
