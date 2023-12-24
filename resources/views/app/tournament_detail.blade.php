@@ -12,7 +12,10 @@
                             <div class="mt-3">
                                 <h4>{{$tournament->title}}</h4>
                                 <p class="text-secondary mb-4">{{$tournament->description}}</p>
-                                <button class="btn btn-primary" onclick="applyTournament({{$tournament->id}})">Apply</button>
+                                @if ($tournament->status == 1)
+                                    <button class="btn btn-primary" onclick="applyTournament({{$tournament->id}})">Apply</button>
+                                @endif
+                                
                             </div>
                         </div>
                         <hr class="my-4" />
@@ -88,24 +91,64 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="d-flex align-items-center mb-3">Bracket</h5>
+                                <h5 class="d-flex align-items-center mb-3">Matches</h5>
                                 
                                   
+                                <div class="row">
+                                    @php
+                                        if($tournament->round > 4){
+                                            $col = "col-4";
+                                        }else{
+                                            $col = "col";
+                                        }
+                                    @endphp
+                                        
+                                    @for ($i = 1; $i <= $tournament->round; $i++)
+                                    <div class="{{$col}}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Round {{$i}}</h5>
+                                                <hr>
 
+                                                @foreach ($matches->where('round',$i) as $item)
+                                                <ul class="list-group mb-3">
+                                                    <li class="list-group-item
+                                                        @if($item->status == 2)
+                                                            @if($item->winner == 1)
+                                                            text-success
+                                                            @else
+                                                            text-danger
+                                                            @endif
+                                                        @else
+                                                        text-white
+                                                        @endif
+                                                    ">[{{$item->Team1->abbreviation}}] - {{$item->Team1->name}}</li>
+                                                    <li class="list-group-item
+                                                    @if($item->status == 2)
+                                                            @if($item->winner == 2)
+                                                            text-success
+                                                            @else
+                                                            text-danger
+                                                            @endif
+                                                        @else
+                                                        text-white
+                                                        @endif
+                                                    ">[{{$item->Team2->abbreviation}}] - {{$item->Team2->name}}</li>
+                                                    @if ($item->MatchTime)
+                                                    <li class="list-group-item text-white bg-info"><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($item->MatchTime->match_time)->format('H:i, d F') }}
+                                                    </li>
+                                                    @endif
+                                                    
+                                                </ul>
+                                                @endforeach
+                                                  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endfor
 
-
-
-
-
-                                <div id="bracket"></div>
-
-
-
-
-
-
-
-
+                                    
+                                </div>
 
 
 

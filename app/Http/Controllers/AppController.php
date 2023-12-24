@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InviteCode;
 use App\Models\Team;
 use App\Models\TeamMember;
+use App\Models\TournamentMatches;
 use App\Models\TournamentParticipant;
 use App\Models\VerificationMeeting;
 use App\Models\Tournament;
@@ -389,7 +390,7 @@ class AppController extends Controller
     }
 
     public function tournament_detail($id){
-        return view('app.tournament_detail', ['tournament' => Tournament::find($id), 'participants' => TournamentParticipant::where('status',1)->get(), 'participans_array' => TournamentParticipant::where('status',1)->get()->toArray()]);
+        return view('app.tournament_detail', ['tournament' => Tournament::find($id), 'participants' => TournamentParticipant::where('round',1)->where('tournament',$id)->get(), 'matches' => TournamentMatches::where('tournament',$id)->get()]);
     }
 
     public function apply_tournament(Request $request){
@@ -430,9 +431,5 @@ class AppController extends Controller
 
         
 
-    }
-
-    public function get_participants(Request $request){
-        return TournamentParticipant::where('tournament', $request->tournament)->where('round', $request->round)->where('status',1)->get();
     }
 }

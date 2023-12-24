@@ -55,6 +55,10 @@ class TournamentMatches extends Model
         return $this->belongsTo(TournamentMatchTimes::class, 'id');
     }
 
+    public function MatchTime(){
+        return $this->hasOne(TournamentMatchTimes::class, 'match_id', 'id');
+    }
+
     public function UserResults(){
         return $this->hasMany(TournamentUserResult::class, 'match_id', 'id');
     }
