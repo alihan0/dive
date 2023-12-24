@@ -52,47 +52,69 @@ foreach ($matches as $match) {
 
         @foreach ($tournamentMatches as $match)
 
-      <section class="uia-timeline__group" aria-labelledby="timeline-demo-4-heading-1">
-          <div class="d-flex">
-            <div class="uia-timeline__point uia-card" data-uia-card-skin="1" data-uia-card-mod="1">
-                <div class="bg-white py-2 px-4"  style="border-left:4px solid #4556BB">
-                    <span class="text-dark">{{$match->Tournament->title ?? ''}}</span>
-                  </div>
-                <div class="uia-card__container">
-                  <div class="uia-card__intro">
-                    <div class="w-100 d-flex justify-content-between">
-                      <div class="bg-white py-2 px-4">
-                        <span class="uia-card__day text-dark">Round</span>
-                        <span class="text-dark">{{$match->round}}</span>
-                      </div>
-                      
+        <a href="/app/match/{{$match->id}}">
+            <section class="uia-timeline__group" aria-labelledby="timeline-demo-4-heading-1">
+                <div class="d-flex">
+                <div class="uia-timeline__point uia-card" data-uia-card-skin="1" data-uia-card-mod="1">
+                    <div class="bg-white py-2 px-4"  style="border-left:4px solid #4556BB">
+                        <span class="text-dark">{{$match->Tournament->title ?? ''}}</span>
+                        </div>
+                    <div class="uia-card__container">
+                        <div class="uia-card__intro">
+                        <div class="w-100 d-flex justify-content-between">
+                            <div class="bg-white py-2 px-4">
+                            <span class="uia-card__day text-dark">Round</span>
+                            <span class="text-dark">{{$match->round}}</span>
+                            </div>
+                            
+                        </div>
+                        </div>
+                        <div class="uia-card__body">
+                        <div class="uia-card__description">
+                            
+                            <ul class="list-group w-100 ">
+                                <li class="list-group-item
+                                @if($match->status == 2)
+                                    @if($match->winner == 1)
+                                    text-success
+                                    @else
+                                    text-danger
+                                    @endif
+                                @else
+                                text-white
+                                @endif
+                                ">[{{$match->Team1->abbreviation}}] - {{$match->Team1->name}}</li>
+                                <li class="list-group-item
+                                @if($match->status == 2)
+                                    @if($match->winner == 2)
+                                    text-success
+                                    @else
+                                    text-danger
+                                    @endif
+                                @else
+                                text-white
+                                @endif
+                                ">[{{$match->Team2->abbreviation}}] - {{$match->Team2->name}}</li>
+                            </ul>
+        
+                        </div>
+                        
+                        </div>
+                        
                     </div>
-                  </div>
-                  <div class="uia-card__body">
-                    <div class="uia-card__description">
-                      
-                        <ul class="list-group w-100 ">
-                            <li class="list-group-item text-white">[{{$match->Team1->abbreviation}}] - {{$match->Team1->name}}</li>
-                            <li class="list-group-item text-white">[{{$match->Team2->abbreviation}}] - {{$match->Team2->name}}</li>
-                        </ul>
-    
+                    <div class="bg-white py-2 px-4"  style="border-left:4px solid #4556BB">
+                        <i class="fas fa-clock text-dark"></i>
+                        @if ($match->MatchTime)
+                        <span class="text-dark">{{ \Carbon\Carbon::parse($match->MatchTime->match_time)->format('d F, Y H:i') }}</span>
+                        @endif
+                        </div>
                     </div>
-                    
-                  </div>
-                  
+                    <div class="w-100">
+                    <img src="{{$match->Tournament->cover ?? ''}}" class="" style="height:241px" alt="">
+                    </div>
                 </div>
-                <div class="bg-white py-2 px-4"  style="border-left:4px solid #4556BB">
-                    <i class="fas fa-clock text-dark"></i>
-                    @if ($match->MatchTime)
-                    <span class="text-dark">{{ \Carbon\Carbon::parse($match->MatchTime->match_time)->format('d F, Y H:i') }}</span>
-                    @endif
-                  </div>
-              </div>
-              <div class="w-100">
-                <img src="{{$match->Tournament->cover ?? ''}}" class="" style="height:241px" alt="">
-              </div>
-          </div>
-        </section>
+            </section>
+        </a>
   
         @endforeach
         
