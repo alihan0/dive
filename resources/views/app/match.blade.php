@@ -3,6 +3,7 @@
 @section('title', 'Match Details')
     
 @section('content')
+
     <div class="row">
         <div class="col-12">
             <div class="container">
@@ -48,11 +49,13 @@
                                             </div>
                                             @endif
                                             
+                                            @if (Auth::user()->Team->team == $match->team1 || Auth::user()->Team->team == $match->team2)
+                                                <button data-bs-toggle="modal" data-bs-target="#reportResultModal" class="match-bet-place text-white" {{$match->status == 2 ? 'disabled':''}}>
+                                                    {{$match->status == 1 ? 'Report Results':'Match End'}}
+                                                </button>
+                                            @endif
                                             
                                             
-                                            <button class="match-bet-place text-white" {{$match->status == 2 ? 'disabled':''}}>
-                                                {{$match->status == 1 ? 'Report Results':'Match End'}}
-                                            </button>
                                         </div>
                                     </div>
                                     <div class="column">
@@ -101,7 +104,7 @@
                                 <h4 class="h5 card-title text-dark" style="font-size:16px">Manager</h4>
                                 <hr style="border:1px solid #222">
                                 <span class="text-dark" style="font-size:10px">
-                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',1)->first()->User->name}}
+                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',1)->first()->User->name ?? '-'}}
                                 </span>
                             </div>
                         </div>
@@ -112,7 +115,7 @@
                                 <h4 class="h5 card-title text-dark" style="font-size:16px">Coach</h4>
                                 <hr style="border:1px solid #222">
                                 <span class="text-dark" style="font-size:10px">
-                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',2)->first()->User->name}}
+                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',2)->first()->User->name ?? '-'}}
                                 </span>
                             </div>
                         </div>
@@ -123,7 +126,7 @@
                                 <h4 class="h5 card-title text-dark" style="font-size:16px">Captain</h4>
                                 <hr style="border:1px solid #222">
                                 <span class="text-dark" style="font-size:10px">
-                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',3)->first()->User->name}}
+                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',3)->first()->User->name ?? '-'}}
                                 </span>
                             </div>
                         </div>
@@ -134,7 +137,7 @@
                                 <h4 class="h5 card-title text-dark" style="font-size:16px">Manager</h4>
                                 <hr style="border:1px solid #222">
                                 <span class="text-dark" style="font-size:10px">
-                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',1)->first()->User->name}}
+                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',1)->first()->User->name ?? '-'}}
                                 </span>
                             </div>
                         </div>
@@ -145,7 +148,7 @@
                                 <h4 class="h5 card-title text-dark" style="font-size:16px">Coach</h4>
                                 <hr style="border:1px solid #222">
                                 <span class="text-dark" style="font-size:10px">
-                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',2)->first()->User->name}}
+                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',2)->first()->User->name ?? '-'}}
                                 </span>
                             </div>
                         </div>
@@ -166,6 +169,105 @@
         </div>
     </div>
     
+
+
+
+
+    <div class="modal fade" tabindex="-1" id="reportResultModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h5 class="modal-title">Report Results</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="card-title mb-3">Are you sure?</h5>
+                <div class="alert alert-warning" role="alert">
+                    When you submit the report, if both teams' reports match, the result will be automatically updated. If there is a conflict between the submitted results, the moderators will determine the outcome of the match. Note that this action cannot be undone. If you sent results by mistake, please contact the support system. Below is the information required to use the support system.
+                </div>
+                <button class="btn btn-outline-warning" disabled>Tournament ID: #{{$match->tournament}}</button>
+                <button class="btn btn-outline-warning" disabled>Match ID: #{{$match->id}}</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal">Continue</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="reportModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h5 class="modal-title">Report Results</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="wonTeam" class="form-label">Which team won?</label>
+                    <select id="wonTeam" class="form-control">
+                        <option value="0">Choose...</option>
+                        <option value="1">Team 1</option>
+                        <option value="2">Team 2</option>
+                    </select>
+                    <div id="emailHelp" class="form-text">If your selection is the same as the opponent team's selection, the winner will be determined automatically.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="ss" class="form-label">Upload Screenshot</label>
+                    <input type="file" class="form-control" id="ss" onchange="upload()">
+                    <input type="hidden" id="ss_data">
+                    <div id="emailHelp" class="form-text">Upload a screenshot of the match result screen to verify the accuracy of your selections.</div>
+                </div>
+            </div>  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="sendReport({{$match->tournament}}, {{$match->round}}, {{$match->id}}, {{Auth::user()->Team->team}})">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        function sendReport(tournament, round, match, team){
+            let result = $("#wonTeam").val()
+            let ss = $("#ss_data").val()
+            
+            axios.post('/app/match/sendResult', {
+                tournament:tournament,
+                round:round,
+                match:match,
+                team:team,
+                result:result,
+                ss:ss
+            }).then((res) => {
+                toastr[res.data.type](res.data.message)
+                if(res.data.status){
+                    setInterval(() => {
+                        window.location.reload()
+                    }, 500);
+                }
+            })
+        }
+        function upload() {
+            var formData = new FormData();
+            var fileInput = document.getElementById('ss');
+            formData.append('file', fileInput.files[0]);
+
+            axios.post('/upload/result', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(function (res) {
+                toastr[res.data.type](res.data.message)
+                if(res.data.status){
+                  $("#ss_data").val(res.data.url)
+                }
+            });
+    }
+    </script>
 @endsection
 
 @section('style')

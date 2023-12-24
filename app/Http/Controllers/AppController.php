@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\TeamMember;
 use App\Models\TournamentMatches;
 use App\Models\TournamentParticipant;
+use App\Models\TournamentUserResult;
 use App\Models\VerificationMeeting;
 use App\Models\Tournament;
 use Auth;
@@ -441,4 +442,52 @@ class AppController extends Controller
     public function match($id){
         return view('app.match', ['match' => TournamentMatches::find($id)]);
     }
+
+    public function send_result(Request $request){
+
+        if($request->result == 0){
+            return response()->json(["type"=>"warning", "message" => "Please choose the winning team
+            "]);
+        }
+
+        if(empty($request->ss)){
+            return response()->json(["type"=>"warning", "message" => "Please upload a screenshot of the results."]);
+        }
+
+        $res = new TournamentUserResult;
+        $res->tournament = $request->tournament;
+        $res->round = $request->round;
+        $res->match_id = $request->match;
+        $res->team = $request->team;
+        $res->result = $request->result;
+        $res->image = $request->ss;
+
+
+
+        $filter = TournamentUserResult::where('tournament',$request->tournament)
+        ->where('round',$request->round)
+        ->where('match_id',$request->match)
+        ->orderBy('id', 'desc') // Sıralamayı id'ye göre azalan sıra ile yaparız
+        ->get()
+        ->unique('team');
+        
+        
+        
+        if($res->save()){
+            if($filter->count() == 2){
+                $filterArray = array_values($filter->toArray());
+                if($filterArray[0]["result"] == $filterArray[1]["result"]){
+                    $match = TournamentMatches::find($request->match);
+                    $match->status = 2;
+                    $match->winner = $filterArray[0]["result"];
+                    $match->save();
+                }
+            }
+            return response()->json(["type" => "success", "message" => "Your report has been sent.", "status" => true]);
+        }else{
+            return response()->json(["type" => "warning", "message" => "Something went wrong..."]);
+        } 
+    }
+
+
 }

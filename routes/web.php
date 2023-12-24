@@ -23,6 +23,7 @@ Route::controller(MainController::class)->group(function () {
     Route::get('/', 'index');
     Route::post('/upload', 'upload');
     Route::post('/upload/cover', 'upload_cover');
+    Route::post('/upload/result', 'upload_result');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
@@ -60,6 +61,7 @@ Route::controller(AppController::class)->prefix('app')->middleware('auth')->grou
 
     Route::get('/matches', 'matches');
     Route::get('/match/{id}', 'match');
+    Route::post('/match/sendResult', 'send_result');
 });
 
 
