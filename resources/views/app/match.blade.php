@@ -94,6 +94,74 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-dark" style="font-size:16px">Manager</h4>
+                                <hr style="border:1px solid #222">
+                                <span class="text-dark" style="font-size:10px">
+                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',1)->first()->User->name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-dark" style="font-size:16px">Coach</h4>
+                                <hr style="border:1px solid #222">
+                                <span class="text-dark" style="font-size:10px">
+                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',2)->first()->User->name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-dark" style="font-size:16px">Captain</h4>
+                                <hr style="border:1px solid #222">
+                                <span class="text-dark" style="font-size:10px">
+                                    [{{$match->Team1->abbreviation}}] - {{$match->Team1Members->where('role',3)->first()->User->name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-dark" style="font-size:16px">Manager</h4>
+                                <hr style="border:1px solid #222">
+                                <span class="text-dark" style="font-size:10px">
+                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',1)->first()->User->name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-dark" style="font-size:16px">Coach</h4>
+                                <hr style="border:1px solid #222">
+                                <span class="text-dark" style="font-size:10px">
+                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',2)->first()->User->name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card bg-white">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-dark" style="font-size:16px">Captain</h4>
+                                <hr style="border:1px solid #222">
+                                <span class="text-dark" style="font-size:10px">
+                                    [{{$match->Team2->abbreviation}}] - {{$match->Team2Members->where('role',3)->first()->User->name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -169,15 +237,6 @@ body {
 	align-items: center;
 	line-height: 1;
 	margin-right: auto;
-	&:before {
-		content: "";
-		display: block;
-		width: 6px;
-		height: 6px;
-		background-color: currentColor;
-		border-radius: 50%;
-		margin-right: 8px;
-	}
 }
 
 .match-tournament {
